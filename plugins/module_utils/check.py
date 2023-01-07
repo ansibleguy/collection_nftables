@@ -1,6 +1,6 @@
-from packaging import version
 from pathlib import Path
 from os import environ
+from packaging import version
 
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.defaults import CONFIG
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.subps import \
@@ -25,6 +25,7 @@ def _check_nft_version() -> bool:
 
 def check_dependencies() -> None:
     try:
+        # pylint: disable=C0415
         from nftables import Nftables
 
         rc, _, _ = Nftables().cmd('list ruleset')
@@ -35,6 +36,7 @@ def check_dependencies() -> None:
             )
 
     except (ModuleNotFoundError, ImportError):
+        # pylint: disable=W0707
         raise SystemExit(
             'For this Ansible-module to work you must install its dependencies first: '
             "'sudo apt install nftables python3-nftables'"

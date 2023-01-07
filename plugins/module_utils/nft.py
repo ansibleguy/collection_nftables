@@ -1,5 +1,4 @@
 from json import loads as json_loads
-from enum import Enum
 
 from ansible.module_utils.basic import AnsibleModule
 
@@ -8,6 +7,7 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.check import \
 
 check_dependencies()
 
+# pylint: disable=C0413
 from nftables import Nftables
 
 RULE_ACTIONS = ['accept', 'drop', 'reject', 'jump', 'return']
@@ -78,8 +78,8 @@ class NFT:
         self.rules = []
 
     def _cmd(self, cmd: str) -> list:
-        rc, output, error = self.n.cmd(cmd)
-        data = json_loads(output)
+        _, stdout, _ = self.n.cmd(cmd)
+        data = json_loads(stdout)
 
         if 'nftables' in data:
             return data['nftables']
@@ -89,15 +89,19 @@ class NFT:
     def get_ruleset(self) -> list:
         return self._cmd(cmd='list ruleset')
 
-    def _find_table(self, name: str) -> NftTable:
+    def _find_table(self, name: str) -> (NftTable, None):
         for table in self.tables:
             if table.name == name:
                 return table
 
-    def _find_chain(self, name: str) -> NftChain:
+        return None
+
+    def _find_chain(self, name: str) -> (NftChain, None):
         for chain in self.chains:
             if chain.name == name:
                 return chain
+
+        return None
 
     @staticmethod
     def _parse_rule_match(expression: dict, side: str) -> str:
@@ -105,9 +109,9 @@ class NFT:
         side = expression['match'][side]
 
         if isinstance(side, dict):
-            for k, v in side.items():
+            for v in side.values():
                 if isinstance(v, dict):
-                    for k2, v2 in v.items():
+                    for v2 in v.values():
                         parts.append(v2)
 
                 else:
@@ -121,7 +125,7 @@ class NFT:
     def parse_ruleset(self):
         ruleset = self.get_ruleset()
         for entry in ruleset:
-            if not any([key in entry for key in VALID_ENTRIES]):
+            if not any(key in entry for key in VALID_ENTRIES):
                 raise SystemExit(f"Got unexpected entry: '{entry}'")
 
         for entry in ruleset:
