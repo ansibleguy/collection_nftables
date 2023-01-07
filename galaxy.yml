@@ -1,0 +1,24 @@
+---
+
+namespace: 'ansibleguy'
+name: 'nftables'
+version: 1.0.0
+readme: 'README.md'
+authors:
+  - 'AnsibleGuy <guy@ansibleguy.net>'
+description: "Ansible Collection to manage NFTables firewalls"
+license_file: 'LICENSE.txt'
+tags:
+  - 'firewall'
+  - 'nftables'
+  - 'linux'
+  - 'iac'
+  - 'network'
+  - 'security'
+  - 'filter'
+dependencies: {}
+repository: 'https://github.com/ansibleguy/collection_nftables'
+documentation: 'https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst'
+homepage: 'https://ansibleguy.net'
+issues: 'https://github.com/ansibleguy/collection_nftables/issues'
+build_ignore: []

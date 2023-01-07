@@ -1,0 +1,58 @@
+# Ansible Collection - ansibleguy.nftables
+
+[![Functional Test Status](https://badges.ansibleguy.net/nftables.collection.test.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/scripts/test.sh)
+[![Lint Test Status](https://badges.ansibleguy.net/nftables.collection.lint.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/scripts/lint.sh)
+[![Ansible Galaxy](https://img.shields.io/ansible/collection/COLLECTION-ID)](https://galaxy.ansible.com/ansibleguy/nftables)
+
+----
+
+## Requirements
+
+First - install nftables and python3-nftables!
+
+The ansible-modules of this collection use the [python3-nftables module](https://ral-arturo.org/2020/11/22/python-nftables-tutorial.html) to interact with nftables. This interface is already used by [firewalld](https://firewalld.org/2019/09/libnftables-JSON).
+
+For the python library to work the installed NFTables version needs to be >= 0.9.3
+
+```bash
+sudo apt install nftables python3-nftables
+
+# check the installed version
+sudo apt policy nftables
+```
+
+Then - install the collection itself:
+
+```bash
+# stable/tested version:
+ansible-galaxy collection install ansibleguy.nftables
+
+# latest version:
+ansible-galaxy collection install git+https://github.com/ansibleguy/collection_nftables.git
+
+# install to specific director for easier development
+cd $PLAYBOOK_DIR
+ansible-galaxy collection install git+https://github.com/ansibleguy/collection_nftables.git -p ./collections
+```
+
+----
+
+## Usage
+
+See: [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst)
+
+----
+
+## Modules
+
+not implemented => development => [testing](https://github.com/ansibleguy/collection_nftables/blob/latest/tests) => unstable (_practical testing_) => stable
+
+| Function      | Module                      | Usage                                                                                                                                                  | State          |
+|:--------------|:----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|
+| **Rules**     | ansibleguy.nftables.rule    | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Quick_reference-nftables_in_10_minutes#Rules)                                                                          | testing        |
+| **Chains**    | ansibleguy.nftables.chain   | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Configuring_chains)                                                                          | not implemented |
+| **Tables**    | ansibleguy.nftables.table   | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Configuring_tables)                                                                          | not implemented |
+| **Variables** | ansibleguy.nftables.var     | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Scripting#Defining_variables) | not implemented |
+| **Sets**      | ansibleguy.nftables.set     | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Sets) | not implemented |
+| **Limits**    | ansibleguy.nftables.limit   | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Limits) | not implemented |
+| **Counters**  | ansibleguy.nftables.counter | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Counters) | not implemented |
