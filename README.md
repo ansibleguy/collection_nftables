@@ -1,7 +1,8 @@
 # Ansible Collection - ansibleguy.nftables
 
-[![Functional Test Status](https://badges.ansibleguy.net/nftables.collection.test.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/scripts/test.sh)
-[![Lint Test Status](https://badges.ansibleguy.net/nftables.collection.lint.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/scripts/lint.sh)
+[![Molecule Test Status](https://badges.ansibleguy.net/collection_nftables.molecule.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/roles/)
+[![YamlLint Test Status](https://badges.ansibleguy.net/collection_nftables.yamllint.svg)](https://yamllint.readthedocs.io/en/stable/)
+[![Ansible-Lint Test Status](https://badges.ansibleguy.net/collection_nftables.ansiblelint.svg)](https://ansible-lint.readthedocs.io/en/latest/)
 [![Ansible Galaxy](https://img.shields.io/ansible/collection/COLLECTION-ID)](https://galaxy.ansible.com/ansibleguy/nftables)
 
 ----

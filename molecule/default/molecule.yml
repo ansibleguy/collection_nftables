@@ -1,0 +1,49 @@
+---
+
+_references:
+  docker:
+    all: &docker_all
+      docker_host: 'tcp://molecule-docker.local:2375'
+      # docker_host: 'unix://var/run/docker.sock'  # localhost
+      purge_networks: true
+      image: 'debian:11-slim'
+      # for docker systemd config see: https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva
+      dockerfile: 'Dockerfile_debian11_systemd.j2'
+      build_image: yes
+      tmpfs: ['/tmp', '/run', '/run/lock']
+      privileged: true
+      command: '/sbin/init'
+
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: test-ag-nftables-tester
+    docker_networks:
+      - name: 'test-ag-nftables'
+        ipam_config:
+          - subnet: '192.168.14.0/24'
+            gateway: '192.168.14.254'
+    networks:
+      - name: 'test-ag-nftables'
+        ipv4_address: '192.168.14.1'
+    groups: [grp_targets]
+    <<: *docker_all
+
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
+scenario:
+  name: default
+  test_sequence:
+    - lint
+    - destroy
+    - syntax
+    - create
+    - converge
+    - verify  # MUST NOT make changes
+    - idempotence
+    - check
+    - destroy

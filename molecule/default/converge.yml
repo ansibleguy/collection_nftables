@@ -1,0 +1,6 @@
+---
+
+- name: Converge
+  hosts: "test-ag-nftables-1"
+  roles:
+    - ansibleguy.nftables.test1

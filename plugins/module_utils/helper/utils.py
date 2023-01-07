@@ -3,10 +3,9 @@ from pstats import Stats
 from io import StringIO
 from datetime import datetime
 from pathlib import Path
-from httpx import ConnectError, ConnectTimeout
 
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.defaults import \
-    DEBUG_CONFIG
+    CONFIG
 
 
 def profiler(
@@ -18,17 +17,10 @@ def profiler(
     _ = Profile()
     _.enable()
 
-    httpx_error = None
-    check_response = None
     if kwargs is None:
         kwargs = {}
 
-    try:
-        check_response = check(**kwargs)
-
-    except (ConnectError, ConnectTimeout, ConnectionError) as error:
-        httpx_error = str(error)
-
+    check(**kwargs)
     _.disable()
     result = StringIO()
     Stats(_, stream=result).sort_stats(sort).print_stats(show_top_n)
@@ -37,7 +29,7 @@ def profiler(
     cleaned_result = '\n'.join(cleaned_result)
 
     if log_file is not None:
-        log_path = Path(DEBUG_CONFIG['path_log'])
+        log_path = Path(CONFIG['path_log'])
         if not log_path.exists():
             log_path.mkdir()
 
@@ -46,9 +38,3 @@ def profiler(
 
     else:
         print(cleaned_result)
-
-    if httpx_error is None:
-        return check_response
-
-    else:
-        raise ConnectionError(httpx_error)

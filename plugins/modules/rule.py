@@ -5,17 +5,14 @@
 
 from ansible.module_utils.basic import AnsibleModule
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.handler import \
-    module_dependency_error, MODULE_EXCEPTIONS
-
-try:
-    from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.utils import profiler
-    from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
-        diff_remove_empty, sort_param_lists
-    from ansible_collections.ansibleguy.nftables.plugins.module_utils.main.rule import Rule
-
-except MODULE_EXCEPTIONS:
-    module_dependency_error()
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.utils import \
+    profiler
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.defaults import \
+    NFT_MOD_ARGS
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
+    diff_remove_empty, sort_param_lists
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.main.rule import Rule
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.nft import NFT
 
 PROFILE = False  # create log to profile time consumption
 
@@ -25,6 +22,7 @@ EXAMPLES = 'https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.
 
 def run_module():
     module_args = dict(
+        **NFT_MOD_ARGS,
     )
 
     result = dict(
@@ -39,6 +37,12 @@ def run_module():
         argument_spec=module_args,
         supports_check_mode=True,
     )
+
+    sort_param_lists(module.params)
+    n = NFT(module)
+    n.parse_ruleset()
+    for t in n.rules[0].matches:
+        raise SystemExit(t.__dict__)
 
     rule = Rule(module=module, result=result)
 
