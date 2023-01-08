@@ -22,18 +22,35 @@ sudo apt policy nftables
 
 The ansible-modules of this collection use the [python3-nftables module](https://ral-arturo.org/2020/11/22/python-nftables-tutorial.html) to interact with nftables. This interface is already used by [firewalld](https://firewalld.org/2019/09/libnftables-JSON).
 
-You can either install it using your package manager (_apt in the example_) or install it using pip (_unofficial version provided by AnsibleGuy_).
+You can either install it using your package manager (_apt in the example_) or using pip (_[unofficial version provided by AnsibleGuy](https://github.com/ansibleguy/python3-nftables)_) on the target system.
 
 ```bash
 # package manager
 sudo apt install python3-nftables
 
-# pip
-pip install ansibleguy-nftables
+# pip => make sure it is installed for the root user or use a virtualenv
+sudo pip install ansibleguy-nftables
 ```
 
+You might want to install it using Ansible:
 
-Then - install the collection itself:
+```yaml
+- name: Installing NFTables
+  ansible.builtin.package:
+    name: ['nftables']  # or ['nftables', 'python3-nftables]
+
+- name: Installing NFTables python-module
+  ansible.builtin.pip:
+    name: 'ansibleguy-nftables'
+
+- name: Enabling and starting NFTables
+  ansible.builtin.service:
+    name: 'nftables.service'
+    state: started
+    enabled: true
+```
+
+Then - install the collection itself: (_on the controller_)
 
 ```bash
 # unstable/latest version:
@@ -56,13 +73,13 @@ See: [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.
 
 not implemented => development => [testing](https://github.com/ansibleguy/collection_nftables/blob/latest/tests) => unstable (_practical testing_) => stable
 
-| Function          | Module                       | Usage                                                                                                                                                                                            | State           |
-|:------------------|:-----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------|
-| **Rules**         | ansibleguy.nftables.rule     | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Quick_reference-nftables_in_10_minutes#Rules) | development     |
-| **Complex rules** | ansibleguy.nftables.rule_raw | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Quick_reference-nftables_in_10_minutes#Rules) | not implemented |
-| **Chains**        | ansibleguy.nftables.chain    | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Configuring_chains)                           | not implemented |
-| **Tables**        | ansibleguy.nftables.table    | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Configuring_tables)                           | not implemented |
-| **Variables**     | ansibleguy.nftables.var      | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Scripting#Defining_variables)                 | not implemented |
-| **Sets**          | ansibleguy.nftables.set      | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Sets)                                         | not implemented |
-| **Limits**        | ansibleguy.nftables.limit    | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Limits)                                       | not implemented |
-| **Counters**      | ansibleguy.nftables.counter  | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Counters)                                     | not implemented |
+| Function         | Module                       | Usage                                                                                                                                                                                            | State           |
+|:-----------------|:-----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------|
+| **Rules**        | ansibleguy.nftables.rule     | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Quick_reference-nftables_in_10_minutes#Rules) | development     |
+| **1-to-1 Rules** | ansibleguy.nftables.rule_raw | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Quick_reference-nftables_in_10_minutes#Rules) | development |
+| **Chains**       | ansibleguy.nftables.chain    | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Configuring_chains)                           | not implemented |
+| **Tables**       | ansibleguy.nftables.table    | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Configuring_tables)                           | not implemented |
+| **Variables**    | ansibleguy.nftables.var      | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Scripting#Defining_variables)                 | not implemented |
+| **Sets**         | ansibleguy.nftables.set      | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Sets)                                         | not implemented |
+| **Limits**       | ansibleguy.nftables.limit    | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Limits)                                       | not implemented |
+| **Counters**     | ansibleguy.nftables.counter  | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Counters)                                     | not implemented |

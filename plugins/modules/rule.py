@@ -63,18 +63,21 @@ def run_module():
         src_nat=dict(
             type='str', required=False, aliases=['snat', 'source_nat', 'outbound_nat'],
             description='If a value is provided, it will be used as source-nat target. '
-                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_(NAT)#Source_NAT'
+                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/'
+                        'Performing_Network_Address_Translation_(NAT)#Source_NAT'
         ),
         dest_nat=dict(
             type='str', required=False, aliases=['dnat', 'destination_nat'],
             description='If a value is provided, it will be used as destination-nat target. '
-                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_(NAT)#Destination_NAT'
+                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/'
+                        'Performing_Network_Address_Translation_(NAT)#Destination_NAT'
         ),
         masquerade=dict(
             type='bool', required=False, aliases=['masque'], default=False,
             description='If set to true source-nat will be performed and its source address '
                         'is automagically set to the address of the output interface. '
-                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_(NAT)#Masquerading'
+                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/'
+                        'Performing_Network_Address_Translation_(NAT)#Masquerading'
         ),
         # additional functionality
         limit=dict(

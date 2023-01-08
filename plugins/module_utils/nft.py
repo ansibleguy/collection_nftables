@@ -24,10 +24,12 @@ from nftables import Nftables
 
 
 class NFT:
-    def __init__(self, module: AnsibleModule):
+    HANDLE_SEPARATOR = ' # handle '
+
+    def __init__(self, module: AnsibleModule, result: dict):
         self.m = module
+        self.r = result
         self.n = Nftables()
-        self.n.set_json_output(True)
         self.tables = []
         self.chains = []
         self.rules = []
@@ -35,17 +37,40 @@ class NFT:
         self.limits = []
         self.sets = []
 
-    def _cmd(self, cmd: str) -> list:
-        _, stdout, _ = self.n.cmd(cmd)
-        data = json_loads(stdout)
+    def _cmd_raw(self, cmd: str) -> list:
+        if not self.m.check_mode or cmd == 'list ruleset':
+            self.n.set_json_output(False)
+            self.n.set_handle_output(True)
+            _, stdout, _ = self.n.cmd(cmd)
+            return stdout.replace('\t', '').split('\n')
 
-        if 'nftables' in data:
-            return data['nftables']
+        return []
 
-        return data
+    def _cmd_json(self, cmd: str) -> list:
+        if not self.m.check_mode or cmd == 'list ruleset':
+            self.n.set_json_output(True)
+            _, stdout, _ = self.n.cmd(cmd)
 
-    def get_ruleset(self) -> list:
-        return self._cmd(cmd='list ruleset')
+            data = json_loads(stdout)
+
+            if 'nftables' in data:
+                return data['nftables']
+
+            return data
+
+        return []
+
+    def cmd_exec(self, cmd: str):
+        if not self.m.check_mode:
+            self.n.set_json_output(False)
+            self.n.set_handle_output(False)
+            rc, stdout, stderr = self.n.cmd(cmd.strip().replace('\n', ''))
+
+            if rc != 0:
+                self.r['nftables_rc'] = rc
+                self.r['nftables_stdout'] = stdout
+                self.r['nftables_stderr'] = stderr
+                self.m.fail_json(f"Command '{cmd}' FAILED with error: '{stderr}'")
 
     @staticmethod
     def find_item(entries: list, find: str, attr: str = 'name'):
@@ -92,8 +117,40 @@ class NFT:
                 rule.init(nft_main=self, raw=entry)
                 self.rules.append(self)
 
+    def ruleset_raw(self) -> dict:
+        # returns ruleset as shown in the config file
+        stdout_lines = self._cmd_raw('list ruleset')
+        data, table, chain = {}, None, None
+
+        for line in stdout_lines:
+            entry = line.strip()
+            if entry in ['', '}']:
+                continue
+
+            if entry.startswith('table'):
+                table = entry.split(' ', 1)[1].rsplit(' ', 4)[0]
+                data[table] = {}
+
+            elif entry.startswith('chain'):
+                chain = entry.split(' ', 2)[1]
+                data[table][chain] = []
+
+            elif table is None or chain is None:
+                # should not happen
+                raise SystemExit(f"Got unexpected entry: '{entry}'")
+
+            else:
+                handle = None
+                if entry.find(self.HANDLE_SEPARATOR) != -1:
+                    entry, handle = entry.split(self.HANDLE_SEPARATOR)
+
+                data[table][chain].append({entry: handle})
+
+        return data
+
     def parse_ruleset(self) -> dict:
-        ruleset = self.get_ruleset()
+        # returns objectified ruleset
+        ruleset = self._cmd_json(cmd='list ruleset')
 
         for entry in ruleset:
             if not any(key in entry for key in VALID_ENTRIES):
