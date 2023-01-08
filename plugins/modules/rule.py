@@ -8,11 +8,13 @@ from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.utils import \
     profiler
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.defaults import \
-    NFT_MOD_ARGS
+    NFT_MOD_ARGS, NFT_RULE_MOD_ARGS
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
     diff_remove_empty, sort_param_lists
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.main.rule import Rule
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.nft import NFT
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
+    RULE_ACTIONS
 
 PROFILE = False  # create log to profile time consumption
 
@@ -23,11 +25,68 @@ EXAMPLES = 'https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.
 def run_module():
     module_args = dict(
         **NFT_MOD_ARGS,
-        id=dict(
-            type='str', required=True, aliases=['name', 'identifier', 'uid'],
-            description='Unique identifier of the rule. '
-                        'Used to match the configured rules with the existing ones. '
-                        "This id is added at the beginning of the rule's comment field."
+        # placement
+        **NFT_RULE_MOD_ARGS,
+        # actual rule
+        src=dict(
+            type='list', elements='str', required=False, aliases=['source', 'source_net'],
+        ),
+        dest=dict(
+            type='list', elements='str', required=False, aliases=['target', 'destination', 'destination_net'],
+        ),
+        src_port=dict(
+            type='list', elements='str', required=False, aliases=['sport', 'source_port'],
+        ),
+        dest_port=dict(
+            type='list', elements='str', required=False, aliases=['port', 'dport', 'destination_port'],
+        ),
+        proto=dict(
+            type='list', elements='str', required=False, aliases=['protocol'],
+        ),
+        proto_type=dict(
+            type='list', elements='str', required=False, aliases=['type', 'protocol_type'],
+        ),
+        proto_code=dict(
+            type='list', elements='str', required=False, aliases=['code', 'protocol_code'],
+        ),
+        input_int=dict(
+            type='list', elements='str', required=False, aliases=['iif', 'iifname', 'input_interface'],
+        ),
+        output_int=dict(
+            type='list', elements='str', required=False, aliases=['oif', 'oifname', 'output_interface'],
+        ),
+        # what should be done on a match
+        action=dict(
+            type='str', required=False, aliases=['a', 'do', 'policy'],
+            choises=RULE_ACTIONS,
+        ),
+        src_nat=dict(
+            type='str', required=False, aliases=['snat', 'source_nat', 'outbound_nat'],
+            description='If a value is provided, it will be used as source-nat target. '
+                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_(NAT)#Source_NAT'
+        ),
+        dest_nat=dict(
+            type='str', required=False, aliases=['dnat', 'destination_nat'],
+            description='If a value is provided, it will be used as destination-nat target. '
+                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_(NAT)#Destination_NAT'
+        ),
+        masquerade=dict(
+            type='bool', required=False, aliases=['masque'], default=False,
+            description='If set to true source-nat will be performed and its source address '
+                        'is automagically set to the address of the output interface. '
+                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_(NAT)#Masquerading'
+        ),
+        # additional functionality
+        limit=dict(
+            type='str', required=False, aliases=['lim', 'l'],
+            description='Provide a limit or name of a pre-defined limit. '
+                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/Limits'
+        ),
+        counter=dict(
+            type='str', required=False, aliases=['lim', 'l'],
+            description='If set to true - a counter will be enabled. '
+                        'If a string is provided it will link to a pre-defined counter. '
+                        'See also: https://wiki.nftables.org/wiki-nftables/index.php/Counters'
         ),
         # src, dest, proto, type, code, iif, oif, dport, sport, counter, limit, action, comment
         # snat, dnat, masque
@@ -51,6 +110,8 @@ def run_module():
     n.parse_ruleset()
     # for t in n.rules[0].matches:
     #     raise SystemExit(t.__dict__)
+
+    # code or type
 
     rule = Rule(module=module, result=result)
 

@@ -8,3 +8,31 @@ CONFIG = dict(
 NFT_MOD_ARGS = dict(
     debug=dict(type='bool', required=False, default=False),
 )
+
+NFT_RULE_MOD_ARGS = dict(
+    id=dict(
+        type='str', required=True, aliases=['name', 'identifier', 'uid'],
+        description='Unique identifier of the rule. '
+                    'Used to match the configured rules with the existing ones. '
+                    "This id is added at the beginning of the rule's comment field."
+    ),
+    table=dict(
+        type='str', required=False, aliases=['t', 'target_table'],
+        description='The name of the table this rule should be inserted into. '
+                    "If only one exists you don't need to provide its name."
+    ),
+    chain=dict(
+        type='str', required=True, aliases=['c', 'target_chain'],
+        description='The name of the chain this rule should be inserted into.'
+    ),
+    before=dict(
+        type='str', required=False, aliases=['before_id'],
+        description='This rule should be placed before a specific other rule. '
+                    'Provide the unique identifier of the other rule!'
+    ),
+    after=dict(
+        type='str', required=False, aliases=['before_id'],
+        description='This rule should be placed after a specific other rule. '
+                    'Provide the unique identifier of the other rule!'
+    ),
+)

@@ -6,7 +6,7 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc 
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.main import \
     NftTable, NftItem, NftChain
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.sub import \
-    NftMatch, NftJump, NftLimit
+    NftMatch, NftJump, NftLimit, NftGoTo
 
 # for schema see: https://www.mankier.com/5/libnftables-json
 
@@ -14,7 +14,7 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.sub
 class NftRule(NftItem):
     KEY = 'Rule'
     RAW_ITEMS = ['comment', 'index']
-    DATA_ITEMS = ['family', 'matches', 'jump', 'action', 'counter', 'limit']
+    DATA_ITEMS = ['family', 'matches', 'jump', 'goto', 'action', 'counter', 'limit']
 
     def __init__(self, table: NftTable, chain: NftChain, raw: dict):
         NftItem.__init__(self=self, raw=raw, table=table)
@@ -25,6 +25,7 @@ class NftRule(NftItem):
         data = dict(
             matches=[],
             jump=None,
+            goto=None,
             action=None,
             comment=None,
             counter=False,
@@ -41,9 +42,20 @@ class NftRule(NftItem):
             self._init_counter(d=data, e=expression, n=nft_main)
             self._init_limit(d=data, e=expression, n=nft_main)
             self._init_jump(d=data, e=expression, n=nft_main)
+            self._init_goto(d=data, e=expression, n=nft_main)
 
         for key in self.DATA_ITEMS:
             setattr(self, key, value_or_none(data, key))
+
+    @staticmethod
+    def _init_goto(e: dict, d: dict, n):
+        if 'goto' in e:
+            d['goto'] = NftGoTo(
+                chain=n.find_item(
+                    entries=n.chains,
+                    find=e['goto']['target'],
+                )
+            )
 
     @staticmethod
     def _init_jump(e: dict, d: dict, n):

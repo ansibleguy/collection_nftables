@@ -54,6 +54,14 @@ class NftJump:
         return f"Jump to chain{self.chain.name}"
 
 
+class NftGoTo:
+    def __init__(self, chain: NftChain):
+        self.chain = chain
+
+    def __repr__(self) -> str:
+        return f"Go to chain{self.chain.name}"
+
+
 # for special-cases
 
 class NftQuota(NftItem):
