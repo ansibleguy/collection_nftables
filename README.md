@@ -25,10 +25,7 @@ sudo apt policy nftables
 Then - install the collection itself:
 
 ```bash
-# stable/tested version:
-ansible-galaxy collection install ansibleguy.nftables
-
-# latest version:
+# unstable/latest version:
 ansible-galaxy collection install git+https://github.com/ansibleguy/collection_nftables.git
 
 # install to specific director for easier development
@@ -48,10 +45,10 @@ See: [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.
 
 not implemented => development => [testing](https://github.com/ansibleguy/collection_nftables/blob/latest/tests) => unstable (_practical testing_) => stable
 
-| Function          | Module                       | Usage                                                                                                                                                  | State          |
-|:------------------|:-----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|
-| **Rules**         | ansibleguy.nftables.rule     | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Quick_reference-nftables_in_10_minutes#Rules)                                                                          | testing        |
-| **Complex rules** | ansibleguy.nftables.rule_raw | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Quick_reference-nftables_in_10_minutes#Rules)                                                                          | testing        |
+| Function          | Module                       | Usage                                                                                                                                                  | State           |
+|:------------------|:-----------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------|
+| **Rules**         | ansibleguy.nftables.rule     | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Quick_reference-nftables_in_10_minutes#Rules)                                                                          | development     |
+| **Complex rules** | ansibleguy.nftables.rule_raw | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Quick_reference-nftables_in_10_minutes#Rules)                                                                          | not implemented |
 | **Chains**        | ansibleguy.nftables.chain    | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Configuring_chains)                                                                          | not implemented |
 | **Tables**        | ansibleguy.nftables.table    | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Configuring_tables)                                                                          | not implemented |
 | **Variables**     | ansibleguy.nftables.var      | [Docs](https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst), [NFTables Docs](https://wiki.nftables.org/wiki-nftables/index.php/Scripting#Defining_variables) | not implemented |
