@@ -2,6 +2,15 @@ from json import loads as json_loads
 
 from ansible.module_utils.basic import AnsibleModule
 
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
+    VALID_ENTRIES
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.main import \
+    NftTable, NftChain
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.rule import \
+    NftRule
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.sub import \
+    NftSet, NftLimit, NftCounter
+
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.check import \
     check_dependencies
 
@@ -10,62 +19,8 @@ check_dependencies()
 # pylint: disable=C0413
 from nftables import Nftables
 
-RULE_ACTIONS = ['accept', 'drop', 'reject', 'jump', 'return']
-VALID_ENTRIES = ['metainfo', 'table', 'chain', 'rule']
 
-
-class NftItem:
-    def __init__(self, handle: int):
-        self.handle = handle
-
-
-class NftTable(NftItem):
-    def __init__(self, family: str, name: str, handle: int):
-        NftItem.__init__(self=self, handle=handle)
-        self.family = family
-        self.name = name
-
-
-class NftChain(NftItem):
-    def __init__(self, family: str, name: str, handle: int, table: NftTable):
-        NftItem.__init__(self=self, handle=handle)
-        self.table = table
-        self.family = family
-        self.name = name
-
-
-class NftRuleMatch:
-    def __init__(self, operator: str, key: str, value: str):
-        self.operator = operator
-        self.key = key
-        self.value = value
-
-
-class NftRuleCounter:
-    def __init__(self, operator: str, key: str, value: str):
-        self.operator = operator
-        self.key = key
-        self.value = value
-
-
-class NftRuleJump:
-    def __init__(self, chain: NftChain):
-        self.chain = chain
-
-
-class NftRule(NftItem):
-    def __init__(
-            self, family: str, handle: int, matches: list, action: str,
-            table: NftTable, chain: NftChain, raw: dict, jump: (NftRuleJump, None)
-    ):
-        NftItem.__init__(self=self, handle=handle)
-        self.table = table
-        self.chain = chain
-        self.family = family
-        self.raw = raw
-        self.matches = matches
-        self.jump = jump
-        self.action = action
+# for schema see: https://www.mankier.com/5/libnftables-json
 
 
 class NFT:
@@ -76,6 +31,9 @@ class NFT:
         self.tables = []
         self.chains = []
         self.rules = []
+        self.counters = []
+        self.limits = []
+        self.sets = []
 
     def _cmd(self, cmd: str) -> list:
         _, stdout, _ = self.n.cmd(cmd)
@@ -89,106 +47,81 @@ class NFT:
     def get_ruleset(self) -> list:
         return self._cmd(cmd='list ruleset')
 
-    def _find_table(self, name: str) -> (NftTable, None):
-        for table in self.tables:
-            if table.name == name:
-                return table
-
-        return None
-
-    def _find_chain(self, name: str) -> (NftChain, None):
-        for chain in self.chains:
-            if chain.name == name:
-                return chain
-
-        return None
-
     @staticmethod
-    def _parse_rule_match(expression: dict, side: str) -> str:
-        parts = []
-        side = expression['match'][side]
+    def find_item(entries: list, find: str, attr: str = 'name'):
+        for item in entries:
+            if getattr(item, attr) == find:
+                return item
 
-        if isinstance(side, dict):
-            for v in side.values():
-                if isinstance(v, dict):
-                    for v2 in v.values():
-                        parts.append(v2)
+        return None
 
-                else:
-                    parts.append(v)
-
-        else:
-            parts.append(side)
-
-        return ' '.join(map(str, parts))
-
-    def parse_ruleset(self):
-        ruleset = self.get_ruleset()
-        for entry in ruleset:
-            if not any(key in entry for key in VALID_ENTRIES):
-                raise SystemExit(f"Got unexpected entry: '{entry}'")
-
+    def _parse_tables(self, ruleset: list):
         for entry in ruleset:
             if 'table' in entry:
                 entry = entry['table']
 
-                self.tables.append(
-                    NftTable(
-                        family=entry['family'],
-                        name=entry['name'],
-                        handle=entry['handle'],
-                    )
-                )
+                self.tables.append(NftTable(raw=entry))
 
+    def _parse_basic(self, ruleset: list, key: str, entries: list, cls):
         for entry in ruleset:
-            if 'chain' in entry:
-                entry = entry['chain']
+            if key in entry:
+                entry = entry[key]
+                entries.append(cls(
+                    raw=entry,
+                    table=self.find_item(
+                        entries=self.tables,
+                        find=entry['table']
+                    ),
+                ))
 
-                self.chains.append(
-                    NftChain(
-                        family=entry['family'],
-                        name=entry['name'],
-                        handle=entry['handle'],
-                        table=self._find_table(name=entry['table'])
-                    )
-                )
-
+    def _parse_rules(self, ruleset: list):
         for entry in ruleset:
             if 'rule' in entry:
                 entry = entry['rule']
-
-                matches = []
-                jump = None
-                action = None
-
-                for expression in entry['expr']:
-                    # expr: 'xt', 'limit', 'counter', 'match'
-                    #   'accept', 'jump', 'drop', 'return',
-                    for a in RULE_ACTIONS:
-                        if a in expression:
-                            action = a
-
-                    if 'match' in expression:
-                        matches.append(
-                            NftRuleMatch(
-                                operator=expression['match']['op'],
-                                key=self._parse_rule_match(expression=expression, side='left'),
-                                value=self._parse_rule_match(expression=expression, side='right'),
-                            )
-                        )
-
-                    if 'jump' in expression:
-                        jump = NftRuleJump(chain=self._find_chain(expression['jump']['target']))
-
-                self.rules.append(
-                    NftRule(
-                        family=entry['family'],
-                        handle=entry['handle'],
-                        table=self._find_table(entry['table']),
-                        chain=self._find_chain(entry['chain']),
-                        raw=entry,
-                        action=action,
-                        jump=jump,
-                        matches=matches,
-                    )
+                rule = NftRule(
+                    table=self.find_item(
+                        entries=self.tables,
+                        find=entry['table']
+                    ),
+                    chain=self.find_item(
+                        entries=self.chains,
+                        find=entry['chain']
+                    ),
+                    raw=entry,
                 )
+                rule.init(nft_main=self, raw=entry)
+                self.rules.append(self)
+
+    def parse_ruleset(self) -> dict:
+        ruleset = self.get_ruleset()
+
+        for entry in ruleset:
+            if not any(key in entry for key in VALID_ENTRIES):
+                raise SystemExit(f"Got unexpected entry: '{entry}'")
+
+        self._parse_tables(ruleset)
+
+        for key, cls, entries in [
+            ('chain', NftChain, self.chains),
+            ('counter', NftCounter, self.counters),
+            ('limit', NftLimit, self.limits),
+            ('set', NftSet, self.sets),
+            ('map', NftSet, self.sets),
+        ]:
+            self._parse_basic(
+                ruleset=ruleset,
+                cls=cls,
+                key=key,
+                entries=entries,
+            )
+
+        self._parse_rules(ruleset)
+
+        return dict(
+            tables=self.tables,
+            chains=self.chains,
+            rules=self.rules,
+            counters=self.counters,
+            limits=self.limits,
+            sets=self.sets,
+        )

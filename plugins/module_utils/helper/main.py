@@ -77,3 +77,7 @@ def sort_param_lists(params: dict) -> None:
     for k in params:
         if isinstance(params[k], list):
             params[k].sort()
+
+
+def value_or_none(data: dict, key: str) -> (str, None):
+    return data['key'] if key in data else None
