@@ -18,7 +18,7 @@ tags:
   - 'filter'
 dependencies: {}
 repository: 'https://github.com/ansibleguy/collection_nftables'
-documentation: 'https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst'
+documentation: 'https://nftables.ansibleguy.net'
 homepage: 'https://ansibleguy.net'
 issues: 'https://github.com/ansibleguy/collection_nftables/issues'
 build_ignore: []

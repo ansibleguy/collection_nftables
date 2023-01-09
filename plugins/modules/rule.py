@@ -11,6 +11,8 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.defaults impor
     NFT_MOD_ARGS, NFT_RULE_MOD_ARGS
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
     diff_remove_empty, sort_param_lists
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.rule import \
+    clean_comment
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.main.rule import Rule
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.nft import NFT
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
@@ -18,8 +20,8 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc 
 
 PROFILE = False  # create log to profile time consumption
 
-DOCUMENTATION = 'https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst'
-EXAMPLES = 'https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst'
+DOCUMENTATION = 'https://nftables.ansibleguy.net/en/latest/modules/rule.html'
+EXAMPLES = 'https://nftables.ansibleguy.net/en/latest/modules/rule.html'
 
 
 def run_module():
@@ -54,6 +56,9 @@ def run_module():
         ),
         output_int=dict(
             type='list', elements='str', required=False, aliases=['oif', 'oifname', 'output_interface'],
+        ),
+        comment=dict(
+            type='str', required=False, aliases=['c', 'cmt'],
         ),
         # what should be done on a match
         action=dict(
@@ -100,7 +105,8 @@ def run_module():
         diff={
             'before': {},
             'after': {},
-        }
+        },
+        executed=[],
     )
 
     module = AnsibleModule(
@@ -109,6 +115,7 @@ def run_module():
     )
 
     sort_param_lists(module.params)
+    module['comment'] = clean_comment(module['comment'])
     n = NFT(module)
     n.parse_ruleset()
     # for t in n.rules[0].matches:

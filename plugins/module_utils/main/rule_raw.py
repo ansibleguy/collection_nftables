@@ -4,7 +4,7 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.base import Ba
 
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.nft import NFT
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.rule import \
-    add_id_to_comment
+    get_uid_comment, clean_comment
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
     ID_SEPARATOR, ID_KEY
 
@@ -17,6 +17,60 @@ class RuleRaw(BaseModule):
         self.n = NFT(module=module, result=result)
 
     def check(self):
+        if self.p['state'] == 'present':
+            if self.p['rule'] is None:
+                self.m.fail_json(
+                    "You need to supply a value for the 'rule' parameter "
+                    'to create one!'
+                )
+
+            self.r['diff']['after'] = clean_comment(self.p['rule'])
+
+        rules = self._build_rules(
+            self._get_table()
+        )
+
+        if self.p['id'] in rules:
+            self.exists = True
+            self.existing = rules[self.p['id']]['handle']
+            rule_item = rules[self.p['id']]
+
+            if self.p['state'] == 'present':
+                # update
+                self.r['diff']['before'] = rule_item['rule']
+
+                if self.r['diff']['before'] != self.r['diff']['after']:
+                    self.r['changed'] = True
+
+            else:
+                # delete
+                self.r['changed'] = True
+
+        else:
+            self.r['test'] = f"{self.p['id']} not in {rules}"
+            # create
+            if self.p['state'] == 'present':
+                self.r['changed'] = True
+
+        return rules
+
+    def _build_rules(self, table: dict) -> dict:
+        rules = {}
+
+        for entry in table[self.p['chain']]:
+            for rule, handle in entry.items():
+                if handle is None:
+                    continue
+
+                if rule.find(ID_KEY) != -1 and rule.find(ID_SEPARATOR) != -1 and rule.find('comment') != -1:
+                    # only try to match rules managed by the modules
+                    split_rule = self._split_beg_uid_comment_end(raw=rule)
+                    rule_new = f"{split_rule['beg']}{split_rule['end']}"
+                    rules[split_rule['id']] = {'rule': rule_new, 'handle': handle}
+
+        return rules
+
+    def _get_table(self) -> dict:
         tables = self.n.ruleset_raw()
 
         if self.p['table'] is None:
@@ -46,34 +100,10 @@ class RuleRaw(BaseModule):
                 f"Existing ones: {', '.join(list(table.keys()))}"
             )
 
-        rules = {}
-
-        for entry in table[self.p['chain']]:
-            for rule, handle in entry.items():
-                if handle is None:
-                    continue
-
-                if rule.find(ID_KEY) != -1 and rule.find(ID_SEPARATOR) != -1 and rule.find('comment') != -1:
-                    # only try to match rules managed by the modules
-                    # beginning, uid, comment, end = self._split_beg_uid_comment_end(raw=rule)
-                    split_rule = self._split_beg_uid_comment_end(raw=rule)
-                    rule_new = f"{split_rule['beg']}comment \"{split_rule['cmt']}\"{split_rule['end']}"
-                    rules[split_rule['id']] = {'rule': rule_new, 'handle': handle}
-
-        if self.p['id'] in rules:
-            self.exists = True
-            self.existing = rules[self.p['id']]['handle']
-            rule = rules[self.p['id']]
-
-            if self.p['rule'] != rule:
-                self.r['diff']['before'] = rule
-                self.r['changed'] = True
-
-        return rules
+        return table
 
     def process(self):
         if self.p['state'] == 'present':
-            self.r['diff']['after'] = self.p['rule']
             self.p['rule'] = self._add_id_to_rule(rule=self.p['rule'])
 
             if self.exists:
@@ -88,36 +118,31 @@ class RuleRaw(BaseModule):
 
     @staticmethod
     def _split_beg_uid_comment_end(raw: str) -> dict:
-        beginning, _r2 = raw.rsplit('comment "', 1)
-        uid_comment, end = _r2.split('"', 1)
-        split_rule = dict(
-            beg=beginning,
-            end=end,
-            id=None,
-        )
+        # extract comment from rule to add its rule-id in its beginning
+        if raw.find('comment') == -1:
+            return dict(beg=f'{raw}"', id=None, end='"')
 
-        if uid_comment.find(ID_SEPARATOR) != -1:
-            uid, cmt = uid_comment.split(ID_SEPARATOR, 1)
-            split_rule['id'] = uid
-            split_rule['cmt'] = cmt
+        if raw.find(ID_KEY) != -1:
+            # extract id if present
+            beg, uid_cmt_end = raw.rsplit(ID_KEY, 1)
+            uid, cmt_end = uid_cmt_end.split(ID_SEPARATOR, 1)
+            cmt_end = clean_comment(cmt_end)
+            return dict(beg=beg, id=uid, end=cmt_end)
 
-        else:
-            split_rule['cmt'] = uid_comment
-
-        return split_rule
+        # make place for id if comment is present
+        beg, cmt_end = raw.split('comment "', 1)
+        return dict(beg=f'{beg}comment "', id=None, end=cmt_end)
 
     def _add_id_to_rule(self, rule: str) -> str:
         if rule.find(ID_KEY) == -1:
             if rule.find('comment') == -1:
-                comment = ''
-                beginning, end = rule, ''
+                beg, end = f'{rule} comment "', '"'
 
             else:
                 split_rule = self._split_beg_uid_comment_end(raw=rule)
-                beginning, comment, end = split_rule['beg'], split_rule['cmt'], split_rule['end']
+                beg, end = split_rule['beg'], split_rule['end']
 
-            comment = add_id_to_comment(raw=comment, uid=self.p['id'])
-            return f'{beginning}{comment}{end}'
+            return f"{beg}{get_uid_comment(uid=self.p['id'])}{end}"
 
         return rule
 
@@ -128,11 +153,11 @@ class RuleRaw(BaseModule):
 
     def delete(self):
         self.n.cmd_exec(
-            cmd=f"delete rule {self.p['table']} {self.existing}",
+            cmd=f"delete rule {self.p['table']} {self.p['chain']} handle {self.existing}",
         )
 
     def update(self):
         self.n.cmd_exec(
-            cmd=f"replace rule {self.p['table']} {self.existing} "
-                f"{self.p['table']} {self.p['chain']} {self.p['rule']}",
+            cmd=f"replace rule {self.p['table']} {self.p['chain']} handle {self.existing} "
+                f"{self.p['rule']}",
         )

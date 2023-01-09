@@ -1,0 +1,3 @@
+# pip requirements to build docs
+sphinx
+sphinx-rtd-theme

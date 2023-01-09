@@ -25,6 +25,7 @@ from nftables import Nftables
 
 class NFT:
     HANDLE_SEPARATOR = ' # handle '
+    CHECK_MODE_CMDS = ['list ruleset']
 
     def __init__(self, module: AnsibleModule, result: dict):
         self.m = module
@@ -37,8 +38,12 @@ class NFT:
         self.limits = []
         self.sets = []
 
+    def _cmd_prep(self, cmd) -> bool:
+        self.r['_executed'].append(cmd)
+        return not self.m.check_mode or cmd in self.CHECK_MODE_CMDS
+
     def _cmd_raw(self, cmd: str) -> list:
-        if not self.m.check_mode or cmd == 'list ruleset':
+        if self._cmd_prep(cmd):
             self.n.set_json_output(False)
             self.n.set_handle_output(True)
             _, stdout, _ = self.n.cmd(cmd)
@@ -47,7 +52,7 @@ class NFT:
         return []
 
     def _cmd_json(self, cmd: str) -> list:
-        if not self.m.check_mode or cmd == 'list ruleset':
+        if self._cmd_prep(cmd):
             self.n.set_json_output(True)
             _, stdout, _ = self.n.cmd(cmd)
 
@@ -61,15 +66,15 @@ class NFT:
         return []
 
     def cmd_exec(self, cmd: str):
-        if not self.m.check_mode:
+        if self._cmd_prep(cmd):
             self.n.set_json_output(False)
             self.n.set_handle_output(False)
             rc, stdout, stderr = self.n.cmd(cmd.strip().replace('\n', ''))
 
             if rc != 0:
-                self.r['nftables_rc'] = rc
-                self.r['nftables_stdout'] = stdout
-                self.r['nftables_stderr'] = stderr
+                self.r['_fail_info']['rc'] = rc
+                self.r['_fail_info']['stdout'] = stdout
+                self.r['_fail_info']['stderr'] = stderr
                 self.m.fail_json(f"Command '{cmd}' FAILED with error: '{stderr}'")
 
     @staticmethod

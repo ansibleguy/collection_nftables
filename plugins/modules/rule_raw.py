@@ -16,8 +16,8 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.main.rule_raw 
 
 PROFILE = False  # create log to profile time consumption
 
-DOCUMENTATION = 'https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst'
-EXAMPLES = 'https://github.com/ansibleguy/collection_nftables/blob/latest/Usage.rst'
+DOCUMENTATION = 'https://nftables.ansibleguy.net/en/latest/modules/rule.html'
+EXAMPLES = 'https://nftables.ansibleguy.net/en/latest/modules/rule.html'
 
 
 def run_module():
@@ -27,7 +27,7 @@ def run_module():
         **NFT_RULE_MOD_ARGS,
         # actual rule
         rule=dict(
-            type='str', required=True, aliases=['raw', 'line', 'content'],
+            type='str', required=False, aliases=['raw', 'line', 'content'],
             description='The raw rule to add to the config'
         ),
     )
@@ -37,7 +37,9 @@ def run_module():
         diff={
             'before': {},
             'after': {},
-        }
+        },
+        _executed=[],
+        _fail_info={},
     )
 
     module = AnsibleModule(
