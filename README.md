@@ -4,6 +4,13 @@
 [![YamlLint Test Status](https://badges.ansibleguy.net/collection_nftables.yamllint.svg)](https://yamllint.readthedocs.io/en/stable/)
 [![Ansible-Lint Test Status](https://badges.ansibleguy.net/collection_nftables.ansiblelint.svg)](https://ansible-lint.readthedocs.io/en/latest/)
 [![Ansible Galaxy](https://img.shields.io/ansible/collection/COLLECTION-ID)](https://galaxy.ansible.com/ansibleguy/nftables)
+[![Docs](https://readthedocs.org/projects/nftables_ansible/badge/?version=latest&style=flat)](https://nftables.ansibleguy.net)
+
+----
+
+## Usage
+
+See: [Docs](https://nftables.ansibleguy.net)
 
 ----
 
@@ -20,7 +27,7 @@ sudo apt install nftables
 sudo apt policy nftables
 ```
 
-The ansible-modules of this collection use the [python3-nftables module](https://ral-arturo.org/2020/11/22/python-nftables-tutorial.html) to interact with nftables. This interface is already used by [firewalld](https://firewalld.org/2019/09/libnftables-JSON).
+The ansible-modules of this collection use the [python3-nftables module](https://ral-arturo.org/2020/11/22/python-nftables-tutorial.html) to interact with nftables.
 
 You can either install it using your package manager (_apt in the example_) or using pip (_[unofficial version provided by AnsibleGuy](https://github.com/ansibleguy/python3-nftables)_) on the target system.
 
@@ -60,12 +67,6 @@ ansible-galaxy collection install git+https://github.com/ansibleguy/collection_n
 cd $PLAYBOOK_DIR
 ansible-galaxy collection install git+https://github.com/ansibleguy/collection_nftables.git -p ./collections
 ```
-
-----
-
-## Usage
-
-See: [Docs](https://nftables.ansibleguy.net)
 
 ----
 
