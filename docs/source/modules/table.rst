@@ -8,7 +8,7 @@ Tables
 
 **STATE**: development
 
-**TESTS**: `ansibleguy.nftables.table <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/test1/tasks/table.yml>`_
+**TESTS**: `ansibleguy.nftables.table <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/table.yml>`_
 
 **NFTables Docs**:
 

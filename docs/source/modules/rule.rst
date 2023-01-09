@@ -8,8 +8,8 @@ Rules
 
 **STATE**: development
 
-**TESTS**: `ansibleguy.nftables.rule <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/test1/tasks/rule.yml>`_ |
-`ansibleguy.nftables.rule_raw <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/test1/tasks/rule_raw.yml>`_
+**TESTS**: `ansibleguy.nftables.rule <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/rule.yml>`_ |
+`ansibleguy.nftables.rule_raw <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/rule_raw.yml>`_
 
 **NFTables Docs**:
 

@@ -8,7 +8,7 @@ Counters
 
 **STATE**: development
 
-**TESTS**: `ansibleguy.nftables.counter <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/test1/tasks/counter.yml>`_
+**TESTS**: `ansibleguy.nftables.counter <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/counter.yml>`_
 
 **NFTables Docs**:
 

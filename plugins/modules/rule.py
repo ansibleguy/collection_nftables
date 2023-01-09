@@ -115,8 +115,8 @@ def run_module():
     )
 
     sort_param_lists(module.params)
-    module['comment'] = clean_comment(module['comment'])
-    n = NFT(module)
+    module.params['comment'] = clean_comment(module.params['comment'])
+    n = NFT(module=module, result=result)
     n.parse_ruleset()
     # for t in n.rules[0].matches:
     #     raise SystemExit(t.__dict__)

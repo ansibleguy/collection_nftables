@@ -8,7 +8,7 @@ Sets
 
 **STATE**: development
 
-**TESTS**: `ansibleguy.nftables.set <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/test1/tasks/set.yml>`_
+**TESTS**: `ansibleguy.nftables.set <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/set.yml>`_
 
 **NFTables Docs**:
 
