@@ -6,6 +6,8 @@
 Chains
 ======
 
+.. include:: ../_include/dev.rst
+
 **STATE**: development
 
 **TESTS**: `ansibleguy.nftables.chain <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/chain.yml>`_

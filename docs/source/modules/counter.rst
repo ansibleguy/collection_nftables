@@ -6,6 +6,8 @@
 Counters
 ========
 
+.. include:: ../_include/dev.rst
+
 **STATE**: development
 
 **TESTS**: `ansibleguy.nftables.counter <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/counter.yml>`_

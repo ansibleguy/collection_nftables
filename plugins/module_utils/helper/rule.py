@@ -7,4 +7,13 @@ def get_uid_comment(uid: str) -> str:
 
 
 def clean_comment(comment: str) -> str:
-    return comment.replace(ID_SEPARATOR * 2, '_').replace(ID_SEPARATOR, '_')
+    replacement = {
+        '_': [ID_SEPARATOR * 2, ID_SEPARATOR],
+        '': ['comment ""', 'comment " "'],
+    }
+
+    for new, old_list in replacement.items():
+        for old in old_list:
+            comment.replace(old, new)
+
+    return comment

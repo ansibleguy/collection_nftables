@@ -6,6 +6,8 @@
 Tables
 ======
 
+.. include:: ../_include/dev.rst
+
 **STATE**: development
 
 **TESTS**: `ansibleguy.nftables.table <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/table.yml>`_

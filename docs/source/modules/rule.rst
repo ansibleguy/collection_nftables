@@ -75,8 +75,10 @@ ansibleguy.nftables.rule_raw
           ansibleguy.nftables.rule_raw:
             id: 'example_id'
             chain: 'target_chain'
-            # table: 'filter'
-            # table_type: 'ip'
+            # table: ''
+            # table_type: ''
+            # before: ''
+            # after: ''
             rule: 'iifname "lo" accept comment "Allow loopback traffic"'
 
         - name: Adding rule
@@ -87,13 +89,14 @@ ansibleguy.nftables.rule_raw
             table_type: 'ip'
             rule: 'iifname "lo" accept comment "Allow loopback traffic"'
 
-        - name: Updating
+        - name: Moving rule before rule 14
           ansibleguy.opnsense.rule_raw:
             id: '11'
             chain: 'input'
             table: 'filter'
             table_type: 'ip'
             rule: 'iifname "eno1" accept comment "Allow some traffic"'
+            before: '14'
 
         - name: Removing
           ansibleguy.opnsense.rule_raw:

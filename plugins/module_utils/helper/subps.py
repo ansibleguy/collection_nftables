@@ -1,5 +1,7 @@
 import subprocess
 
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import is_in
+
 
 def _format_command(cmd: (str, list)) -> list:
     if not isinstance(cmd, (str, list)):
@@ -8,7 +10,7 @@ def _format_command(cmd: (str, list)) -> list:
     if isinstance(cmd, list):
         return cmd
 
-    if cmd.find(' ') != -1:
+    if is_in(' ', cmd):
         return cmd.split(' ')
 
     return [cmd]

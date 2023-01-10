@@ -4,6 +4,7 @@ from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
     VALID_ENTRIES
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import is_in
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.main import \
     NftTable, NftChain
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.rule import \
@@ -75,7 +76,7 @@ class NFT:
                 self.r['_fail_info']['rc'] = rc
                 self.r['_fail_info']['stdout'] = stdout
                 self.r['_fail_info']['stderr'] = stderr
-                self.m.fail_json(f"Command '{cmd}' FAILED with error: '{stderr}'")
+                self.m.fail_json(msg=f"Command '{cmd}' FAILED with error: '{stderr}'", **self.r)
 
     @staticmethod
     def find_item(entries: list, find: str, attr: str = 'name'):
@@ -146,7 +147,7 @@ class NFT:
 
             else:
                 handle = None
-                if entry.find(self.HANDLE_SEPARATOR) != -1:
+                if is_in(self.HANDLE_SEPARATOR, entry):
                     entry, handle = entry.split(self.HANDLE_SEPARATOR)
 
                 data[table][chain].append({entry: handle})

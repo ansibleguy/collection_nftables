@@ -81,3 +81,7 @@ def sort_param_lists(params: dict) -> None:
 
 def value_or_none(data: dict, key: str) -> (str, None):
     return data['key'] if key in data else None
+
+
+def is_in(find: str, data: str) -> bool:
+    return data.find(find) != -1

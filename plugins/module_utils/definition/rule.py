@@ -3,6 +3,7 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main im
 
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
     RULE_ACTIONS, ID_SEPARATOR, ID_KEY
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import is_in
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.main import \
     NftTable, NftItem, NftChain
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.sub import \
@@ -112,7 +113,7 @@ class NftRule(NftItem):
                 )
 
     def _id_from_comment(self, cmt: str) -> str:
-        if cmt.startswith(ID_KEY) and cmt.find(ID_SEPARATOR) != -1:
+        if cmt.startswith(ID_KEY) and is_in(ID_SEPARATOR, cmt):
             self.id, cmt = cmt.replace(ID_KEY, '').split(ID_SEPARATOR, 1)
             if self.id.startswith('"'):
                 self.id = self.id[1:]
