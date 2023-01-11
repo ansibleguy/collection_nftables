@@ -8,13 +8,13 @@ class BaseModule:
         self.p = module.params
 
     def check(self) -> None:
+        # check if changed & pre-processing
         pass
 
     def process(self) -> None:
+        # make changes
         pass
 
-    def reload(self) -> None:
+    def get(self) -> list:
+        # pull existing entries
         pass
-
-    def list(self) -> list:
-        return []

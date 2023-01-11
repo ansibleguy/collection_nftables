@@ -150,7 +150,7 @@ class NFT:
                 if is_in(self.HANDLE_SEPARATOR, entry):
                     entry, handle = entry.split(self.HANDLE_SEPARATOR)
 
-                data[table][chain].append({entry: handle})
+                data[table][chain].append({'rule': entry, 'handle': handle})
 
         return data
 

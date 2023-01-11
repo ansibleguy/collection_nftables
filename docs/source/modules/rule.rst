@@ -6,14 +6,10 @@
 Rules
 =====
 
-**STATE**: development
-
 **TESTS**: `ansibleguy.nftables.rule <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/rule.yml>`_ |
 `ansibleguy.nftables.rule_raw <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/rule_raw.yml>`_
 
 **NFTables Docs**:
-
-
 
 * `Source-nat <https://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_(NAT)#Source_NAT>`_
 * `Destination-nat <https://wiki.nftables.org/wiki-nftables/index.php/Performing_Network_Address_Translation_(NAT)#Destination_NAT>`_
@@ -40,11 +36,18 @@ Definition
 ansibleguy.nftables.rule_raw
 ============================
 
+**STATE**: testing
+
 ..  csv-table:: Definition
     :header: "Parameter", "Type", "Required", "Default", "Aliases", "Comment"
     :widths: 15 10 10 10 10 45
 
     "rule","string","false for deletion else true","\-","raw, line, content","The raw rule to add to the config"
+
+ansibleguy.nftables.rule
+========================
+
+**STATE**: development
 
 ----
 

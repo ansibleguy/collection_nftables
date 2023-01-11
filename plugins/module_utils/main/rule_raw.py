@@ -54,31 +54,46 @@ class RuleRaw(BaseModule):
 
         self._find_before_after(key='before', rules=rules)
         self._find_before_after(key='after', rules=rules)
-        self.r['changed'] = self._position_changed(rules)
+
+        if not self.r['changed']:
+            self.r['changed'] = self._position_changed(rules)
+
         return rules
 
     def _position_changed(self, rules: dict) -> bool:
-        actual_uid, config_uid = None, None
-        position = rules[self.p['id']]['line']
-
-        if self.p['before'] is not None:
-            config_uid = self.p['before']
-            for uid, value in rules.items():
-                if value['line'] == position + 1:
-                    actual_uid = uid
-                    break
-
-        if self.p['after'] is not None:
-            config_uid = self.p['after']
-            for uid, value in rules.items():
-                if value['line'] == position - 1:
-                    actual_uid = uid
-                    break
-
-        if actual_uid is None:
+        if self.p['id'] not in rules:
             return False
 
-        return actual_uid != config_uid
+        position = rules[self.p['id']]['line']
+        other, other_position = None, -1
+        check, check_position = None, None
+
+        if self.p['before'] is not None:
+            other = self.p['before']
+            check = 'b'
+
+        if self.p['after'] is not None:
+            other = self.p['after']
+            check = 'a'
+
+        if other is None:
+            return False
+
+        for uid, values in rules.items():
+            if uid == other:
+                other_position = values['line']
+
+        if other is None:
+            self.m.warn(f"Provided rule was not found: '{other}'")
+            return False
+
+        if check == 'b':
+            check_position = other_position - 1
+
+        else:
+            check_position = other_position + 1
+
+        return position != check_position
 
     def _find_before_after(self, key: str, rules: dict):
         if self.p[key] is not None:
@@ -90,19 +105,22 @@ class RuleRaw(BaseModule):
         entry_line = 1
 
         for entry in table[self.p['chain']]:
-            for rule, handle in entry.items():
-                if handle is None:
-                    continue
+            if entry['handle'] is None:
+                continue
 
-                if all([is_in(ID_KEY, rule), is_in(ID_SEPARATOR, rule), is_in('comment', rule)]):
-                    # only try to match rules managed by the modules
-                    split_rule = self._split_beg_uid_comment_end(raw=rule)
-                    rule_new = f"{split_rule['beg']}{split_rule['end']}".strip()
-                    rules[split_rule['id']] = {
-                        'rule': rule_new,
-                        'handle': handle,
-                        'line': entry_line
-                    }
+            if all([
+                is_in(ID_KEY, entry['rule']),
+                is_in(ID_SEPARATOR, entry['rule']),
+                is_in('comment', entry['rule'])
+            ]):
+                # only try to match rules managed by the modules
+                split_rule = self._split_beg_uid_comment_end(raw=entry['rule'])
+                rule_new = f"{split_rule['beg']}{split_rule['end']}".strip()
+                rules[split_rule['id']] = {
+                    'rule': rule_new,
+                    'handle': entry['handle'],
+                    'line': entry_line
+                }
 
             entry_line += 1
 
@@ -179,7 +197,8 @@ class RuleRaw(BaseModule):
             return dict(beg=beg, id=uid, end=cmt_end)
 
         # make place for id if comment is present
-        return dict(beg=f'{raw} comment "', id=None, end='"')
+        beg, cmt_end = raw.split('comment "', 1)
+        return dict(beg=f'{beg}comment "', id=None, end=cmt_end)
 
     def _add_id_to_rule(self, rule: str) -> str:
         if is_in(ID_KEY, rule):
@@ -216,8 +235,8 @@ class RuleRaw(BaseModule):
     def update(self):
         if self.before_after_handle is not None:
             # could not find option to set position when calling 'replace'
-            self.delete()
             self.create()
+            self.delete()
 
         else:
             self.n.cmd_exec(
