@@ -21,8 +21,8 @@ class Chain(BaseModule):
                     "You need to supply a 'policy' to create a chain that uses a 'hook'."
                 )
 
-        prefix = f"{self.p['table_family']} {self.p['table']} {self.p['name']}"
         table = f"{self.p['table_family']} {self.p['table']}"
+        prefix = f"{table} {self.p['name']}"
         configured = self._build_configured(prefix=prefix)
 
         # check if exists
