@@ -65,6 +65,25 @@ That ID is added at the beginning of the rule's comment field. The ID is separat
 Examples
 ********
 
+ansibleguy.nftables.list
+========================
+
+.. code-block:: yaml
+
+    - hosts: all
+      gather_facts: no
+      become: true
+      tasks:
+        - name: Pulling existing rules
+          ansibleguy.nftables.list:
+            target: 'rules'
+          register: rules
+
+        - name: Show rules
+          ansible.builtin.debug:
+            var: rules.data
+
+
 ansibleguy.nftables.rule_raw
 ============================
 

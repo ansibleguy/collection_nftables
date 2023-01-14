@@ -2,9 +2,9 @@
 
 .. include:: ../_include/head.rst
 
-======
-Chains
-======
+====
+List
+====
 
 **STATE**: testing
 

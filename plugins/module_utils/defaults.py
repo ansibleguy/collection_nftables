@@ -6,6 +6,7 @@ CONFIG = dict(
 )
 
 NFT_MOD_ARGS = dict(
+    force=dict(type='bool', required=False, default=False),
     debug=dict(type='bool', required=False, default=False),
     state=dict(type='str', required=False, choices=['present', 'absent'], default='present'),
 )

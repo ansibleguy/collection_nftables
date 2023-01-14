@@ -7,7 +7,10 @@ from ansible.module_utils.basic import AnsibleModule
 def diff_remove_empty(diff: dict) -> dict:
     d = diff.copy()
     for k in diff.keys():
-        if len(diff[k]) == 0:
+        if diff[k] is None:
+            d.pop(k)
+
+        elif len(diff[k]) == 0:
             d.pop(k)
 
     return d
@@ -84,4 +87,15 @@ def value_or_none(data: dict, key: str) -> (str, None):
 
 
 def is_in(find: str, data: str) -> bool:
-    return data.find(find) != -1
+    if isinstance(data, str):
+        return data.find(find) != -1
+
+    raise ValueError(data)
+
+
+def one_in(find: list, data: str) -> bool:
+    return any(is_in(find=f, data=data) for f in find)
+
+
+def all_in(find: list, data: str) -> bool:
+    return all(is_in(find=f, data=data) for f in find)

@@ -2,8 +2,8 @@ from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.base import BaseModule
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.nft import NFT
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import is_in
+from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
+    is_in, all_in
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.rule import \
     get_uid_comment, clean_comment
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
@@ -13,9 +13,6 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc 
 class RuleRaw(BaseModule):
     def __init__(self, module: AnsibleModule, result: dict):
         BaseModule.__init__(self=self, module=module, result=result)
-        self.exists = False
-        self.existing = None
-        self.n = NFT(module=module, result=result)
         self.position = None  # position the rule should be placed in (before/after)
         self.before_after_handle = None
 
@@ -108,11 +105,7 @@ class RuleRaw(BaseModule):
             if entry['handle'] is None:
                 continue
 
-            if all([
-                is_in(ID_KEY, entry['rule']),
-                is_in(ID_SEPARATOR, entry['rule']),
-                is_in('comment', entry['rule'])
-            ]):
+            if all_in(find=[ID_KEY, ID_SEPARATOR, 'comment'], data=entry['rule']):
                 # only try to match rules managed by the modules
                 split_rule = self._split_beg_uid_comment_end(raw=entry['rule'])
                 rule_new = f"{split_rule['beg']}{split_rule['end']}".strip()

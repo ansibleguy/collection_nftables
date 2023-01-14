@@ -421,6 +421,8 @@ disable=E0611, E0401,  # ansible modules will not be found
         C0103,  # single-letter attributes
         R0903,  # too few public methods
         R0801,  # ansible modules
+        W0201,  # base class
+        W0511,  # todos
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option

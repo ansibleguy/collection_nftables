@@ -10,7 +10,7 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.utils i
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.defaults import \
     NFT_MOD_ARGS
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
-    diff_remove_empty, sort_param_lists
+    diff_remove_empty
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.main.table import \
     Table
 
@@ -25,13 +25,13 @@ def run_module():
     module_args = dict(
         **NFT_MOD_ARGS,
         name=dict(
-            type='str', required=False, aliases=['n', 'table'],
+            type='str', required=True, aliases=['n', 'table'],
             description='The name of the table'
         ),
         family=dict(
-            type='str', required=False, aliases=['f'],
+            type='str', required=True, aliases=['f', 'fam', 'type'],
             choices=['inet', 'ip6', 'ip', 'arp', 'bridge', 'netdev'],
-            description='Type of the table'
+            description='Table type'
         ),
     )
 
@@ -50,7 +50,6 @@ def run_module():
         supports_check_mode=True,
     )
 
-    sort_param_lists(module.params)
     tab = Table(module=module, result=result)
 
     def process():
