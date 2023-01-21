@@ -2,7 +2,7 @@
 
 - name: Converge
   hosts: test-ag-nftables-collection-1
-  roles:
+  tasks:
     - name: Importing test-role
       import_role:
         name: "{{ playbook_dir }}/../../roles/_nftables_test1"
