@@ -1,6 +1,8 @@
 ---
 
 - name: Converge
-  hosts: "test-ag-nftables-1"
+  hosts: test-ag-nftables-collection-1
   roles:
-    - ansibleguy.nftables._nftables_test1
+    - name: Importing test-role
+      import_role:
+        name: "{{ playbook_dir }}/../../roles/_nftables_test1"

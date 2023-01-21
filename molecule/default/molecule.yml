@@ -19,16 +19,15 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: test-ag-nftables-tester
+  - name: test-ag-nftables-collection-1
     docker_networks:
-      - name: 'test-ag-nftables'
+      - name: 'test-ag-nftables-collection'
         ipam_config:
-          - subnet: '192.168.14.0/24'
-            gateway: '192.168.14.254'
+          - subnet: '192.168.15.0/24'
+            gateway: '192.168.15.254'
     networks:
-      - name: 'test-ag-nftables'
-        ipv4_address: '192.168.14.1'
-    groups: [grp_targets]
+      - name: 'test-ag-nftables-collection'
+        ipv4_address: '192.168.15.1'
     <<: *docker_all
 
 provisioner:
