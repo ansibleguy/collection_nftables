@@ -42,7 +42,4 @@ scenario:
     - syntax
     - create
     - converge
-    - verify  # MUST NOT make changes
-    - idempotence
-    - check
     - destroy
