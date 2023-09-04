@@ -1,0 +1,11 @@
+---
+
+requires_ansible: ">=2.14"
+
+action_groups:
+  all:
+    - ansibleguy.nftables.chain
+    - ansibleguy.nftables.list
+    - ansibleguy.nftables.rule
+    - ansibleguy.nftables.rule_raw
+    - ansibleguy.nftables.table
