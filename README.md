@@ -80,6 +80,8 @@ Then - install the collection itself: (_on the controller_)
 
 ```bash
 # unstable/latest version:
+ansible-galaxy collection install ansibleguy.nftables
+# OR
 ansible-galaxy collection install git+https://github.com/ansibleguy/collection_nftables.git
 
 # install to specific director for easier development
