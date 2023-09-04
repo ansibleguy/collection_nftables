@@ -1,0 +1,7 @@
+---
+
+galaxy_info:
+  role_name: 'NFTables Testing'
+  author: 'AnsibleGuy'
+  description: 'Role to test NFTables collection'
+  license: 'GPLv3'
