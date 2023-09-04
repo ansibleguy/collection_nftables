@@ -9,3 +9,5 @@ skip_list:
   - 'ignore-errors'
   - 'yaml'
   - '204'  # line length => checked by yamllint
+  - 'meta-runtime[unsupported-version]'
+  - 'galaxy[no-changelog]'

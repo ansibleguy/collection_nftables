@@ -423,6 +423,7 @@ disable=E0611, E0401,  # ansible modules will not be found
         R0801,  # ansible modules
         W0201,  # base class
         W0511,  # todos
+        R1735,  # dict format
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
