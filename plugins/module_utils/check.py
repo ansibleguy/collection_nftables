@@ -15,7 +15,11 @@ def _check_nft_version() -> bool:
             result = process(cmd=['nft', '--version'])
 
             for part in result['stdout'].split(' '):
-                _v = version.parse(part)
+                try:
+                    _v = version.parse(part)
+                except version.InvalidVersion:
+                    # version.parse throw exceptions if part is not parsable as a version
+                    _v = None 
                 if isinstance(_v, version.Version):
                     nft_version = _v
                     break
