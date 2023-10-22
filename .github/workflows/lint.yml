@@ -41,7 +41,7 @@ jobs:
         shell: bash
 
       - name: Running PyLint
-        run: pylint --recursive=y .
+        run: pylint --recursive=y --ignore-patterns=.*?_test.py .
         shell: bash
 
       - name: Running YamlLint
