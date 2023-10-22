@@ -1,8 +1,0 @@
----
-
-- name: Converge
-  hosts: test-ag-nftables-collection-1
-  tasks:
-    - name: Importing test-role
-      ansible.builtin.import_role:
-        name: "{{ playbook_dir }}/../../roles/_nftables_test1"
