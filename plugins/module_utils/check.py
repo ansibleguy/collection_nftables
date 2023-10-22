@@ -17,7 +17,7 @@ def _check_nft_version() -> bool:
 
 def _validate_version(raw_version: str) -> bool:
     # regex for semantic versioning
-    vers = regex_match(r'(v[0-9\\.]*?)(\s|$)', raw_version)
+    vers = regex_match(r'.*(v[0-9\\.]*?)(\s|$)', raw_version)
     if vers:
         try:
             vers = version.parse(vers[0])
