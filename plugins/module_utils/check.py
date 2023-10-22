@@ -20,7 +20,7 @@ def _validate_version(raw_version: str) -> bool:
     vers = regex_match(r'.*(v[0-9\\.]*?)(\s|$)', raw_version)
     if vers:
         try:
-            vers = version.parse(vers[0])
+            vers = version.parse(vers[1])
             if isinstance(vers, version.Version):
                 return vers >= CONFIG['min_version']
 
