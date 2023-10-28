@@ -8,7 +8,6 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.subps i
 
 def _check_nft_version() -> bool:
     result = process(cmd=['nft', '--version'])
-    print(result)
     if result['rc'] != 0:
         return False
 
