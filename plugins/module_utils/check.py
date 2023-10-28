@@ -1,5 +1,4 @@
-from pathlib import Path
-from os import environ
+from re import match as regex_match
 from packaging import version
 
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.defaults import CONFIG
@@ -8,20 +7,27 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.subps i
 
 
 def _check_nft_version() -> bool:
-    nft_version = version.parse('0')  # will also fail if nft is not installed
+    result = process(cmd=['nft', '--version'])
+    print(result)
+    if result['rc'] != 0:
+        return False
 
-    for search_dir in environ['PATH'].split(':'):
-        if Path(f"{search_dir}/nft").exists():
-            result = process(cmd=['nft', '--version'])
+    return _validate_version(result['stdout'])
 
-            for part in result['stdout'].split(' '):
-                _v = version.parse(part)
-                if isinstance(_v, version.Version):
-                    nft_version = _v
-                    break
 
-    return nft_version >= CONFIG['min_version']
+def _validate_version(raw_version: str) -> bool:
+    # regex for semantic versioning
+    vers = regex_match(r'.*(v[0-9\\.]*?)(\s|$)', raw_version)
+    if vers:
+        try:
+            vers = version.parse(vers[1])
+            if isinstance(vers, version.Version):
+                return vers >= CONFIG['min_version']
 
+        except IndexError:
+            pass
+
+    return False
 
 def check_dependencies() -> None:
     try:

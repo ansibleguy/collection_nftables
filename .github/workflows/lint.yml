@@ -1,0 +1,59 @@
+---
+
+name: Lint
+
+on:
+  push:
+    branches: [latest]
+    paths:
+      - '**.py'
+      - '**.yml'
+      - '.github/workflows/test.yml'
+  pull_request:
+    branches: [latest]
+    paths:
+      - '**.py'
+      - '**.yml'
+      - '.github/workflows/test.yml'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        python-version: [3.10]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Install python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements_lint.txt
+        shell: bash
+
+      - name: Running PyLint
+        run: pylint --recursive=y --ignore-patterns=.*?_test.py .
+        shell: bash
+
+      - name: Running YamlLint
+        run: yamllint .
+        shell: bash
+
+      - name: Preparing collection for AnsibleLint
+        run: |
+          mkdir -p /tmp/ansible_lint/collections/ansible_collections/ansibleguy
+          ln -s ${{ github.workspace }} /tmp/ansible_lint/collections/ansible_collections/ansibleguy/nftables
+        shell: bash
+
+      - name: Running AnsibleLint
+        run: ANSIBLE_COLLECTIONS_PATH=/tmp/ansible_lint/collections ansible-lint -c .ansible-lint.yml
+        shell: bash
