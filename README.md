@@ -1,6 +1,6 @@
 # Ansible Collection - ansibleguy.nftables
 
-[![Lint](https://github.com/ansibleguy/collection_nftables/actions/workflows/lint.yml/badge.svg)](https://github.com/ansibleguy/collection_nftables/actions/workflows/lint.yml)
+[![Lint](https://github.com/ansibleguy/collection_nftables/actions/workflows/lint.yml/badge.svg?branch=latest)](https://github.com/ansibleguy/collection_nftables/actions/workflows/lint.yml)
 [![Unit Tests](https://github.com/ansibleguy/collection_nftables/actions/workflows/test.yml/badge.svg)](https://github.com/ansibleguy/collection_nftables/actions/workflows/test.yml)
 [![Molecule Test Status](https://badges.ansibleguy.net/collection_nftables.molecule.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/roles/)
 [![YamlLint Test Status](https://badges.ansibleguy.net/collection_nftables.yamllint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/yamllint.sh.j2)
