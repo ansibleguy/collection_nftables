@@ -217,12 +217,12 @@ class RuleRaw(BaseModule):
             action = 'insert'
 
         self.n.cmd_exec(
-            cmd=f"{action} rule {self.p['table']} {self.p['chain']}{position} {self.p['rule']}",
+            cmd=f"{action} rule {self.p['table_type']} {self.p['table']} {self.p['chain']}{position} {self.p['rule']}",
         )
 
     def delete(self):
         self.n.cmd_exec(
-            cmd=f"delete rule {self.p['table']} {self.p['chain']} handle {self.existing}",
+            cmd=f"delete rule {self.p['table_type']} {self.p['table']} {self.p['chain']} handle {self.existing}",
         )
 
     def update(self):
@@ -233,6 +233,6 @@ class RuleRaw(BaseModule):
 
         else:
             self.n.cmd_exec(
-                cmd=f"replace rule {self.p['table']} {self.p['chain']} handle {self.existing} "
+                cmd=f"replace rule {self.p['table_type']} {self.p['table']} {self.p['chain']} handle {self.existing} "
                     f"{self.p['rule']}",
             )
