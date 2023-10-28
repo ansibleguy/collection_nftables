@@ -1,5 +1,5 @@
 # pip requirements
 yamllint
 pylint
-ansible-core
+ansible-core==6.20.3
 ansible-lint
