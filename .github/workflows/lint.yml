@@ -9,12 +9,14 @@ on:
       - '**.py'
       - '**.yml'
       - '.github/workflows/test.yml'
+      - 'requirements_lint.txt'
   pull_request:
     branches: [latest]
     paths:
       - '**.py'
       - '**.yml'
       - '.github/workflows/test.yml'
+      - 'requirements_lint.txt'
 
 jobs:
   build:
