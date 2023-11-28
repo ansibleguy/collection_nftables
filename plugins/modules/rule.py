@@ -20,8 +20,8 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc 
 
 PROFILE = False  # create log to profile time consumption
 
-DOCUMENTATION = 'https://nftables.ansibleguy.net/en/latest/modules/rule.html'
-EXAMPLES = 'https://nftables.ansibleguy.net/en/latest/modules/rule.html'
+# DOCUMENTATION = 'https://nftables.ansibleguy.net/en/latest/modules/rule.html'
+# EXAMPLES = 'https://nftables.ansibleguy.net/en/latest/modules/rule.html'
 
 
 def run_module():
