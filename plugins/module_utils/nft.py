@@ -15,7 +15,6 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.sub
 from ansible_collections.ansibleguy.nftables.plugins.module_utils.check import \
     check_dependencies
 
-check_dependencies()
 
 # pylint: disable=C0413
 from nftables import Nftables
@@ -29,6 +28,7 @@ class NFT:
     CHECK_MODE_CMDS = ['list ruleset']
 
     def __init__(self, module: AnsibleModule, result: dict):
+        check_dependencies()
         self.m = module
         self.r = result
         self.n = Nftables()

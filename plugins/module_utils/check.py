@@ -35,7 +35,7 @@ def check_dependencies() -> None:
 
         rc, _, _ = Nftables().cmd('list ruleset')
         if rc == -1:
-            raise SystemExit(
+            raise PermissionError(
                 'You need to run this module as root '
                 'so it can interact with NFTables!'
             )

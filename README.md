@@ -17,6 +17,14 @@ See: [Docs](https://nftables.ansibleguy.net)
 
 ----
 
+## Contribute
+
+Feel free to contribute to this project using [pull-requests](https://github.com/ansibleguy/collection_nftables/pulls), [issues](https://github.com/ansibleguy/collection_nftables/issues) and [discussions](https://github.com/ansibleguy/collection_nftables/discussions)!
+
+See also: [Contributing](https://github.com/ansibleguy/collection_nftables/blob/latest/CONTRIBUTING.md)
+
+----
+
 ## Modules
 
 not implemented => development => [testing](https://github.com/ansibleguy/collection_nftables/blob/latest/tests) => unstable (_practical testing_) => stable

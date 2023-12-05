@@ -1,0 +1,29 @@
+---
+
+- name: Testing NFTables Modules - Cleanup
+  hosts: testing
+  become: true
+  gather_facts: true
+  vars:
+    test_module: 'all'
+
+  tasks:
+    - name: Cleanup ansibleguy.nftables.list
+      ansible.builtin.import_tasks: tasks/list_cleanup.yml
+      when: "test_module in ['all', 'list']"
+
+    - name: Cleanup ansibleguy.nftables.table
+      ansible.builtin.import_tasks: tasks/table_cleanup.yml
+      when: "test_module in ['all', 'table']"
+
+    - name: Cleanup ansibleguy.nftables.chain
+      ansible.builtin.import_tasks: tasks/chain_cleanup.yml
+      when: "test_module in ['all', 'chain']"
+
+    - name: Cleanup ansibleguy.nftables.rule_raw
+      ansible.builtin.import_tasks: tasks/rule_raw_cleanup.yml
+      when: "test_module in ['all', 'rule_raw']"
+
+    - name: Cleanup ansibleguy.nftables.rule
+      ansible.builtin.import_tasks: tasks/rule_cleanup.yml
+      when: "test_module in ['all', 'rule']"

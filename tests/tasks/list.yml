@@ -1,0 +1,41 @@
+---
+
+- name: List | Pulling existing Tables
+  ansibleguy.nftables.list:
+    target: 'tables'
+  register: list_tables1
+
+# - ansible.builtin.debug:
+#     var: list_tables1.data
+
+- name: List | Checking existing Tables
+  ansible.builtin.assert:
+    that:
+      - "'data' in list_tables1"
+      - list_tables1.data | length == 1
+
+- name: List | Pulling existing Chains
+  ansibleguy.nftables.list:
+    target: 'chains'
+  register: list_chains1
+
+# - ansible.builtin.debug:
+#     var: list_chains1.data
+
+- name: List | Checking existing Chains
+  ansible.builtin.assert:
+    that:
+      - "'data' in list_chains1"
+
+- name: List | Pulling existing Rules
+  ansibleguy.nftables.list:
+    target: 'rules'
+  register: list_rules1
+
+# - ansible.builtin.debug:
+#     var: list_rules1.data
+
+- name: List | Checking existing Rules
+  ansible.builtin.assert:
+    that:
+      - "'data' in list_rules1"
