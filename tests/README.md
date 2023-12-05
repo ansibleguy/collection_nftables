@@ -68,3 +68,5 @@ Examples:
 * Enable difference-mode: `bash scripts/test.sh -D`
 * Limit the execution: `bash scripts/test.sh --limit container`
 * Only test one module: `bash scripts/test.sh -e test_module=list`
+
+If a testing fails you might need/want to run the cleanup: `bash scripts/test_cleanup.sh`
