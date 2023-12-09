@@ -14,6 +14,10 @@ But you will have to run Ansible by using the `--limit=container` or `--limit=vm
 
 Python libraries: `apt install python3-nftables python3-packaging`
 
+Add a ssh-public key for the user and enable ssh-public-key authentication in the ssh-server config. (`/home/<TEST-USER>/.ssh/authorized_keys`)
+
+Grant root privileges: `usermod -a -G sudo <TEST-USER>`
+
 ### Virtual Machine
 
 We are using a [Debian 12 minimal]() installation.
