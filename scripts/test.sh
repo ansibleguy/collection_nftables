@@ -10,7 +10,9 @@ source "$(dirname "$0")/test_prep.sh"  # shared
 echo ''
 echo '##### STARTING #####'
 
-ansible-playbook -k -K -i inventory/hosts.yml test.yml "$@"
+echo "EXECUTING: ansible-playbook -i inventory/hosts.yml test.yml ${ARG_FLAGS}"
+# shellcheck disable=SC2046
+ansible-playbook -i inventory/hosts.yml test.yml $ARG_FLAGS
 
 rm -rf "$TMP_DIR"
 

@@ -10,7 +10,9 @@ Both must be reachable by SSH as **we are using Ansible directly for integration
 
 You can also only set-up one of these test-systems.
 
-But you will have to run Ansible by using the `--limit container` or `--limit vm` argument.
+But you will have to run Ansible by using the `--limit=container` or `--limit=vm` argument.
+
+Python libraries: `apt install python3-nftables python3-packaging`
 
 ### Virtual Machine
 
@@ -81,7 +83,7 @@ Parameters you add to the test-script execution will be passed to `ansible-playb
 Examples:
 
 * Enable difference-mode: `bash scripts/test.sh -D`
-* Limit the execution: `bash scripts/test.sh --limit container`
-* Only test one module: `bash scripts/test.sh -e test_module=list`
+* Limit the execution: `bash scripts/test.sh --limit=container`
+* Only test one module: `bash scripts/test.sh -e=test_module=list`
 
 If a testing fails you might need/want to run the cleanup: `bash scripts/test_cleanup.sh`

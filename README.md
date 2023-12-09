@@ -1,14 +1,14 @@
 # Ansible Collection - ansibleguy.nftables
 
-[![Functional Test Status](https://badges.ansibleguy.net/nftables.collection.test.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/scripts/test.sh)
 [![Lint](https://github.com/ansibleguy/collection_nftables/actions/workflows/lint.yml/badge.svg?branch=latest)](https://github.com/ansibleguy/collection_nftables/actions/workflows/lint.yml)
 [![Unit Tests](https://github.com/ansibleguy/collection_nftables/actions/workflows/test.yml/badge.svg)](https://github.com/ansibleguy/collection_nftables/actions/workflows/test.yml)
-[![Molecule Test Status](https://badges.ansibleguy.net/collection_nftables.molecule.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/roles/)
+[![Ansible Galaxy](https://badges.ansibleguy.net/galaxy.badge.svg)](https://galaxy.ansible.com/ui/repo/published/ansibleguy/nftables)
+[![Docs](https://readthedocs.org/projects/nftables_ansible/badge/?version=latest&style=flat)](https://nftables.ansibleguy.net)
+
+[![Functional Test Status](https://badges.ansibleguy.net/nftables.collection.test.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/scripts/test.sh)
 [![YamlLint Test Status](https://badges.ansibleguy.net/collection_nftables.yamllint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/yamllint.sh.j2)
 [![PyLint Test Status](https://badges.ansibleguy.net/collection_nftables.pylint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/pylint.sh.j2)
 [![Ansible-Lint Test Status](https://badges.ansibleguy.net/collection_nftables.ansiblelint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/ansiblelint.sh.j2)
-[![Ansible Galaxy](https://badges.ansibleguy.net/galaxy.badge.svg)](https://galaxy.ansible.com/ui/repo/published/ansibleguy/nftables)
-[![Docs](https://readthedocs.org/projects/nftables_ansible/badge/?version=latest&style=flat)](https://nftables.ansibleguy.net)
 
 Functional Test Logs: [Short](https://badges.ansibleguy.net/log/collection_nftables_test_short.log), [Full](https://badges.ansibleguy.net/log/collection_nftables_test.log)
 
@@ -76,7 +76,7 @@ You might want to install it using Ansible:
 ```yaml
 - name: Installing NFTables
   ansible.builtin.package:
-    name: ['nftables']  # or ['nftables', 'python3-nftables]
+    name: ['nftables']  # or ['nftables', 'python3-nftables']
 
 - name: Installing NFTables python-module
   ansible.builtin.pip:

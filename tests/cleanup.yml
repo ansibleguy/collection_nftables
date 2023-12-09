@@ -3,12 +3,12 @@
 - name: Testing NFTables Modules - Cleanup
   hosts: testing
   become: true
-  gather_facts: true
+  gather_facts: false
   vars:
-    ansible_host: "{{ lookup('ansible.builtin.env', ansible_host_env_var) | default(ansible_host) }}"
-    ansible_port: "{{ lookup('ansible.builtin.env', 'TEST_PORT') | default(ansible_port) }}"
-    ansible_user: "{{ lookup('ansible.builtin.env', 'TEST_USER') | default(ansible_user) }}"
-    ansible_sudo_pass: "{{ lookup('ansible.builtin.env', 'TEST_PWD') | default(ansible_sudo_pass) }}"
+    ansible_host: "{{ lookup('ansible.builtin.env', ansible_host_env_var) | default(_ansible_host) }}"
+    ansible_port: "{{ lookup('ansible.builtin.env', 'TEST_PORT') | default(_ansible_port) }}"
+    ansible_user: "{{ lookup('ansible.builtin.env', 'TEST_USER') | default(_ansible_user) }}"
+    ansible_sudo_pass: "{{ lookup('ansible.builtin.env', 'TEST_PWD') | default(_ansible_sudo_pass) }}"
     test_module: 'all'
 
   tasks:

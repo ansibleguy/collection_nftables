@@ -13,6 +13,7 @@ then
   then
     TEST_PWD="$(cat "$TEST_PWD")"
   fi
+  echo "CONFIG: User '${TEST_USER}', Port '${TEST_PORT}', VM '${TEST_VM}', CONTAINER '${TEST_CONT}'"
 fi
 
 cd "$(dirname "$0")/.."
@@ -27,3 +28,12 @@ export ANSIBLE_COLLECTIONS_PATH="$TMP_COL_DIR"
 export ANSIBLE_INVENTORY_UNPARSED_WARNING=False
 
 cd "${COL_DIR}/tests/"
+
+ARG_FLAGS=''
+for arg in "$@"
+do
+  if [[ $arg == -* ]]
+  then
+    ARG_FLAGS="${ARG_FLAGS} ${arg}"
+  fi
+done
