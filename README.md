@@ -5,7 +5,7 @@
 [![Ansible Galaxy](https://badges.ansibleguy.net/galaxy.badge.svg)](https://galaxy.ansible.com/ui/repo/published/ansibleguy/nftables)
 [![Docs](https://readthedocs.org/projects/nftables_ansible/badge/?version=latest&style=flat)](https://nftables.ansibleguy.net)
 
-[![Functional Test Status](https://badges.ansibleguy.net/nftables.collection.test.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/scripts/test.sh)
+[![Functional Test Status](https://badges.ansibleguy.net/nftables.collection.test.svg)](https://github.com/ansibleguy/collection_nftables/tree/latest/tests)
 [![YamlLint Test Status](https://badges.ansibleguy.net/collection_nftables.yamllint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/yamllint.sh.j2)
 [![PyLint Test Status](https://badges.ansibleguy.net/collection_nftables.pylint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/pylint.sh.j2)
 [![Ansible-Lint Test Status](https://badges.ansibleguy.net/collection_nftables.ansiblelint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/ansiblelint.sh.j2)
