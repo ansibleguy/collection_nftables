@@ -2,4 +2,7 @@
 
 ansible_host: '0.0.0.0'  # ADD YOUR IP
 ansible_user: 'dummy'  # ADD YOUR USER
+ansible_sudo_pass: ''  # ADD YOUR PWD
 ansible_port: 22
+
+ansible_host_env_var: 'TEST_VM'

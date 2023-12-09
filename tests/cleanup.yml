@@ -5,25 +5,29 @@
   become: true
   gather_facts: true
   vars:
+    ansible_host: "{{ lookup('ansible.builtin.env', ansible_host_env_var) | default(ansible_host) }}"
+    ansible_port: "{{ lookup('ansible.builtin.env', 'TEST_PORT') | default(ansible_port) }}"
+    ansible_user: "{{ lookup('ansible.builtin.env', 'TEST_USER') | default(ansible_user) }}"
+    ansible_sudo_pass: "{{ lookup('ansible.builtin.env', 'TEST_PWD') | default(ansible_sudo_pass) }}"
     test_module: 'all'
 
   tasks:
-    - name: Cleanup ansibleguy.nftables.list
+    - name: CLEANUP ansibleguy.nftables.list
       ansible.builtin.import_tasks: tasks/list_cleanup.yml
       when: "test_module in ['all', 'list']"
 
-    - name: Cleanup ansibleguy.nftables.table
+    - name: CLEANUP ansibleguy.nftables.table
       ansible.builtin.import_tasks: tasks/table_cleanup.yml
       when: "test_module in ['all', 'table']"
 
-    - name: Cleanup ansibleguy.nftables.chain
+    - name: CLEANUP ansibleguy.nftables.chain
       ansible.builtin.import_tasks: tasks/chain_cleanup.yml
       when: "test_module in ['all', 'chain']"
 
-    - name: Cleanup ansibleguy.nftables.rule_raw
+    - name: CLEANUP ansibleguy.nftables.rule_raw
       ansible.builtin.import_tasks: tasks/rule_raw_cleanup.yml
       when: "test_module in ['all', 'rule_raw']"
 
-    - name: Cleanup ansibleguy.nftables.rule
+    - name: CLEANUP ansibleguy.nftables.rule
       ansible.builtin.import_tasks: tasks/rule_cleanup.yml
       when: "test_module in ['all', 'rule']"

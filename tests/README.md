@@ -35,9 +35,24 @@ I would recommend using [a LXC](https://wiki.debian.org/LXC) if you have the nee
 
 * Docker: `docker pull debian:12`
 
+   You will have to install NFTables and make sure to use the ssh-server as entrypoint:
+
+   ```
+   EXPOSE 1222
+   CMD ["/usr/sbin/sshd","-D", "-p", "1222", "-o", "ListenAddress=0.0.0.0"]
+   ```
+
 ### Config
 
-Add your test-system's IPs and users to the `inventory/host_vars/*.yml` files.
+Add your test-system's IPs and users to the `inventory/host_vars/*.yml` files OR use the environmental variables:
+
+```bash
+export TEST_VM=192.168.0.1
+export TEST_CONT=192.168.0.2
+export TEST_PORT=1222
+export TEST_USER=dummy
+export TEST_PWD=test123
+```
 
 A NFTables base-config might be added later on.
 
@@ -53,7 +68,7 @@ Example: `tests/tasks/list.yml` is testing `ansibleguy.nftables.list`
 
 Tests should always clean up after itself so the test-system is back to the state it was in before! Add those cleanup-tasks in `tests/tasks/<MODULE>_cleanup.yml`
 
-As the connection over SSH is needed for Ansible to work - tests should never deny/drop this connection.
+As the connection over SSH is needed for Ansible to work - tests should never deny/drop this connection (TCP 22/1222).
 
 ----
 

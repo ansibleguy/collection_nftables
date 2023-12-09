@@ -1,5 +1,6 @@
 # Ansible Collection - ansibleguy.nftables
 
+[![Functional Test Status](https://badges.ansibleguy.net/nftables.collection.test.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/scripts/test.sh)
 [![Lint](https://github.com/ansibleguy/collection_nftables/actions/workflows/lint.yml/badge.svg?branch=latest)](https://github.com/ansibleguy/collection_nftables/actions/workflows/lint.yml)
 [![Unit Tests](https://github.com/ansibleguy/collection_nftables/actions/workflows/test.yml/badge.svg)](https://github.com/ansibleguy/collection_nftables/actions/workflows/test.yml)
 [![Molecule Test Status](https://badges.ansibleguy.net/collection_nftables.molecule.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/roles/)
@@ -8,6 +9,8 @@
 [![Ansible-Lint Test Status](https://badges.ansibleguy.net/collection_nftables.ansiblelint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/ansiblelint.sh.j2)
 [![Ansible Galaxy](https://badges.ansibleguy.net/galaxy.badge.svg)](https://galaxy.ansible.com/ui/repo/published/ansibleguy/nftables)
 [![Docs](https://readthedocs.org/projects/nftables_ansible/badge/?version=latest&style=flat)](https://nftables.ansibleguy.net)
+
+Functional Test Logs: [Short](https://badges.ansibleguy.net/log/collection_nftables_test_short.log), [Full](https://badges.ansibleguy.net/log/collection_nftables_test.log)
 
 ----
 
@@ -91,7 +94,7 @@ Then - install the collection itself: (_on the controller_)
 ```bash
 # unstable/latest version:
 ansible-galaxy collection install ansibleguy.nftables
-# OR
+## OR
 ansible-galaxy collection install git+https://github.com/ansibleguy/collection_nftables.git
 
 # install to specific director for easier development
