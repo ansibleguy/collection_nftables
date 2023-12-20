@@ -40,7 +40,7 @@ Usage
 
 Changes on existing tables must be enforced using the 'force' parameter.
 
-**Be aware**: If a table changed it needs to be removed and re-added to apply those changes! **All of its chains and rules are be dropped!**
+**Be aware**: If a table changed it needs to be removed and re-added to apply those changes! **All of its chains and rules are dropped!**
 
 ----
 
