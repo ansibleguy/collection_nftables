@@ -17,6 +17,8 @@ Functional Test Logs: [Short](https://badges.ansibleguy.net/log/collection_nftab
 
 See: [Docs](https://nftables.ansibleguy.net)
 
+You want a simple Ansible GUI? Check-out my [Ansible WebUI](https://github.com/ansibleguy/webui)
+
 ----
 
 ## Contribute
