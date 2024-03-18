@@ -1,5 +1,7 @@
 # Ansible Collection - ansibleguy.nftables
 
+<a href='https://ko-fi.com/ansible0guy' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy me a coffee' />
+
 [![Ansible Galaxy](https://badges.ansibleguy.net/galaxy.badge.svg)](https://galaxy.ansible.com/ui/repo/published/ansibleguy/nftables)
 [![Docs](https://readthedocs.org/projects/nftables_ansible/badge/?version=latest&style=flat)](https://nftables.ansibleguy.net)
 
