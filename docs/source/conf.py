@@ -19,5 +19,8 @@ sticky_navigation = True
 source_suffix = {
     '.rst': 'restructuredtext',
 }
-html_theme_options = {}
+html_theme_options = {
+    'banner_text': 'Check out <a href="https://github.com/ansibleguy/collection_nftables">the repository on GitHub</a> | '
+                   'Report <a href="https://github.com/ansibleguy/collection_nftables/issues/new/choose">missing/incorrect information or broken links</a>'
+}
 html_short_title = 'Ansible NFTables'
