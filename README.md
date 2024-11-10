@@ -37,7 +37,7 @@ See also: [Contributing](https://github.com/ansibleguy/collection_nftables/blob/
 
   E-Mail: [contact@oxl.at](mailto:contact@oxl.at)
 
-  Tel: [+43 720 302 5732](tel:+437203025732)
+  Tel: [+43 3115 40 900 0](tel:+433115409000)
 
   Web: [EN](https://www.o-x-l.com) | [DE](https://www.oxl.at)
 
