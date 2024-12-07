@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url><loc>https://nftables.ansibleguy.net/en/latest/</loc></url>
+
+   <url><loc>https://nftables.ansibleguy.net/en/latest/usage/1_install.html</loc></url>
+   <url><loc>https://nftables.ansibleguy.net/en/latest/usage/2_basic.html</loc></url>
+
+   <url><loc>https://nftables.ansibleguy.net/en/latest/modules/1_basic.html</loc></url>
+   <url><loc>https://nftables.ansibleguy.net/en/latest/modules/chain.html</loc></url>
+   <url><loc>https://nftables.ansibleguy.net/en/latest/modules/list.html</loc></url>
+   <url><loc>https://nftables.ansibleguy.net/en/latest/modules/rule.html</loc></url>
+   <url><loc>https://nftables.ansibleguy.net/en/latest/modules/table.html</loc></url>
+   <!--
+   <url><loc>https://nftables.ansibleguy.net/en/latest/modules/counter.html</loc></url>
+   <url><loc>https://nftables.ansibleguy.net/en/latest/modules/limit.html</loc></url>
+   <url><loc>https://nftables.ansibleguy.net/en/latest/modules/set.html</loc></url>
+   <url><loc>https://nftables.ansibleguy.net/en/latest/modules/var.html</loc></url>
+   -->
+</urlset>
