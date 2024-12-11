@@ -14,8 +14,8 @@ from ansible_collections.ansibleguy.nftables.plugins.module_utils.nft import NFT
 
 PROFILE = False  # create log to profile time consumption
 
-# DOCUMENTATION = 'https://nftables.ansibleguy.net/en/latest/modules/list.html'
-# EXAMPLES = 'https://nftables.ansibleguy.net/en/latest/modules/list.html'
+# DOCUMENTATION = 'https://nftables.ansibleguy.net/modules/list.html'
+# EXAMPLES = 'https://nftables.ansibleguy.net/modules/list.html'
 
 
 def run_module():
