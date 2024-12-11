@@ -20,6 +20,8 @@ See: [Docs](https://nftables.ansibleguy.net)
 
 [![Docs Uptime](https://status.oxl.at/api/v1/endpoints/4--ansibleguy_ansible-collection---nftables-documentation/uptimes/7d/badge.svg)](https://status.oxl.at/endpoints/4--ansibleguy_ansible-collection---nftables-documentation)
 
+[Alternative Link](https://nftables-ansible.readthedocs.io/)
+
 You want a simple Ansible GUI? Check-out my [Ansible WebUI](https://github.com/ansibleguy/webui)
 
 ----
