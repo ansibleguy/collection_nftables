@@ -2,13 +2,19 @@
 
 [![Ansible Galaxy](https://badges.ansibleguy.net/galaxy.badge.svg)](https://galaxy.ansible.com/ui/repo/published/ansibleguy/nftables)
 
-[![Functional Test Status](https://badges.ansibleguy.net/nftables.collection.test.svg)](https://github.com/ansibleguy/collection_nftables/tree/latest/tests)
+[![Lint](https://github.com/ansibleguy/collection_nftables/actions/workflows/lint.yml/badge.svg)](https://github.com/ansibleguy/collection_nftables/actions/workflows/lint.yml)
 [![Unit Tests](https://github.com/ansibleguy/collection_nftables/actions/workflows/test.yml/badge.svg)](https://github.com/ansibleguy/collection_nftables/actions/workflows/test.yml)
-[![YamlLint Test Status](https://badges.ansibleguy.net/collection_nftables.yamllint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/yamllint.sh.j2)
-[![PyLint Test Status](https://badges.ansibleguy.net/collection_nftables.pylint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/pylint.sh.j2)
-[![Ansible-Lint Test Status](https://badges.ansibleguy.net/collection_nftables.ansiblelint.svg)](https://github.com/ansibleguy/_meta_cicd/blob/latest/templates/usr/local/bin/cicd/ansiblelint.sh.j2)
 
-Functional Test Logs: [Short](https://badges.ansibleguy.net/log/collection_nftables_test_short.log), [Full](https://badges.ansibleguy.net/log/collection_nftables_test.log)
+**Functional Tests**: 
+
+* Status: [![Functional Test Status](https://badges.ansibleguy.net/nftables.collection.test.svg)](https://github.com/ansibleguy/collection_nftables/blob/latest/scripts/test.sh) |
+[![Functional-Tests](https://github.com/ansibleguy/collection_nftables/actions/workflows/functional_test_result.yml/badge.svg)](https://github.com/ansibleguy/collection_nftables/actions/workflows/functional_test_result.yml)
+* Logs: [API](https://ci.ansibleguy.net/api/job/ansible-test-collection-nftables/logs?token=2b7bba30-9a37-4b57-be8a-99e23016ce70&lines=1000) |
+[Daily Archive](https://github.com/ansibleguy/collection_nftables/actions/workflows/functional_test_result.yml) |
+[Short](https://badges.ansibleguy.net/log/collection_nftables_test_short.log) | [Full](https://badges.ansibleguy.net/log/collection_nftables_test.log)
+
+Internal CI: [Tester Role](https://github.com/ansibleguy/_meta_cicd) | [Jobs API](https://github.com/O-X-L/github-self-hosted-jobs-systemd)
+
 
 ----
 
