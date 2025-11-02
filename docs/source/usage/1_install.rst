@@ -39,7 +39,7 @@ You can either install it using your package manager (*apt in the example*) or u
     sudo apt install python3-nftables
 
     # pip => make sure it is installed for the root user or use a virtualenv
-    sudo pip install oxl-nftables
+    sudo pip install oxl-libnftables
 
 Using Ansible
 =============
@@ -52,7 +52,7 @@ Using Ansible
 
     - name: Installing NFTables python-module
       ansible.builtin.pip:
-        name: 'oxl-nftables'
+        name: 'oxl-libnftables'
 
     - name: Enabling and starting NFTables
       ansible.builtin.service:
