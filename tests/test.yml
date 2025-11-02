@@ -12,23 +12,23 @@
     test_module: 'all'
 
   tasks:
-    - name: RUNNING TESTS of module ansibleguy.nftables.list
+    - name: RUNNING TESTS of module oxlorg.nftables.list
       ansible.builtin.import_tasks: tasks/list.yml
       when: "test_module in ['all', 'list']"
 
-    - name: RUNNING TESTS of module ansibleguy.nftables.table
+    - name: RUNNING TESTS of module oxlorg.nftables.table
       ansible.builtin.import_tasks: tasks/table.yml
       when: "test_module in ['all', 'table']"
 
-    - name: RUNNING TESTS of module ansibleguy.nftables.chain
+    - name: RUNNING TESTS of module oxlorg.nftables.chain
       ansible.builtin.import_tasks: tasks/chain.yml
       when: "test_module in ['all', 'chain']"
 
-    - name: RUNNING TESTS of module ansibleguy.nftables.rule_raw
+    - name: RUNNING TESTS of module oxlorg.nftables.rule_raw
       ansible.builtin.import_tasks: tasks/rule_raw.yml
       when: "test_module in ['all', 'rule_raw']"
 
-    - name: RUNNING TESTS of module ansibleguy.nftables.rule
+    - name: RUNNING TESTS of module oxlorg.nftables.rule
       ansible.builtin.import_tasks: tasks/rule.yml
       when: "test_module in ['all', 'rule']"
 

@@ -1,4 +1,4 @@
-# ansibleguy.nftables - Testing
+# oxlorg.nftables - Testing
 
 As NFTables behaves differently in containers, we are testing on a Linux VM and a Linux Container (_LXC > Docker_).
 
@@ -70,7 +70,7 @@ When modifying tests you should run the lint-script: `bash scripts/lint.sh`
 
 Tests are placed under: `tests/tasks/` and should be named as the module they are testing.
 
-Example: `tests/tasks/list.yml` is testing `ansibleguy.nftables.list`
+Example: `tests/tasks/list.yml` is testing `oxlorg.nftables.list`
 
 Tests should always clean up after itself so the test-system is back to the state it was in before! Add those cleanup-tasks in `tests/tasks/<MODULE>_cleanup.yml`
 

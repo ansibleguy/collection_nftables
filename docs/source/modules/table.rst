@@ -10,7 +10,7 @@ Tables
 
 **STATE**: testing
 
-**TESTS**: `ansibleguy.nftables.table <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/table.yml>`_
+**TESTS**: `oxlorg.nftables.table <https://github.com/O-X-L/ansible-collection-nftables/blob/latest/roles/_nftables_test1/tasks/table.yml>`_
 
 **NFTables Docs**:
 
@@ -23,7 +23,7 @@ Definition
 
 .. include:: ../_include/param_basic.rst
 
-ansibleguy.nftables.table
+oxlorg.nftables.table
 =========================
 
 ..  csv-table:: Definition
@@ -47,7 +47,7 @@ Changes on existing tables must be enforced using the 'force' parameter.
 Examples
 ********
 
-ansibleguy.nftables.table
+oxlorg.nftables.table
 =========================
 
 .. code-block:: yaml
@@ -57,19 +57,19 @@ ansibleguy.nftables.table
       become: true
       tasks:
         - name: Example
-          ansibleguy.nftables.table:
+          oxlorg.nftables.table:
             name: 'example'
             family: 'inet'
             # force: false
             # state: present
 
         - name: Adding inet table 'test'
-          ansibleguy.nftables.table:
+          oxlorg.nftables.table:
             name: 'test'
             family: 'inet'
 
         - name: Pulling existing tables
-          ansibleguy.nftables.list:
+          oxlorg.nftables.list:
             target: 'tables'
           register: tables
 
@@ -78,7 +78,7 @@ ansibleguy.nftables.table
             var: tables.data
 
         - name: Removing inet table 'test'
-          ansibleguy.nftables.table:
+          oxlorg.nftables.table:
             name: 'test'
             family: 'inet'
             state: absent

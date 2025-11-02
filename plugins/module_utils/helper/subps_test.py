@@ -7,7 +7,7 @@ import pytest
 ])
 def test_process(cmd: str, rc: int, stdout: str):
     # pylint: disable=C0415
-    from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.subps import process
+    from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.subps import process
     result = process(cmd)
 
     assert result['rc'] == rc

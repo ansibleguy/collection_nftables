@@ -1,2 +1,2 @@
 # pip requirements
-ansibleguy-nftables
+oxl-nftables

@@ -9,5 +9,5 @@ import pytest
 ])
 def test_version_check(raw_version: str, result: bool):
     # pylint: disable=C0415
-    from ansible_collections.ansibleguy.nftables.plugins.module_utils.check import _validate_version
+    from ansible_collections.oxlorg.nftables.plugins.module_utils.check import _validate_version
     assert _validate_version(raw_version) is result

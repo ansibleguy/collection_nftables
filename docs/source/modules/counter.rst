@@ -10,7 +10,7 @@ Counters
 
 **STATE**: development
 
-**TESTS**: `ansibleguy.nftables.counter <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/counter.yml>`_
+**TESTS**: `oxlorg.nftables.counter <https://github.com/O-X-L/ansible-collection-nftables/blob/latest/roles/_nftables_test1/tasks/counter.yml>`_
 
 **NFTables Docs**:
 
@@ -23,22 +23,18 @@ Definition
 
 .. include:: ../_include/param_basic.rst
 
-ansibleguy.nftables.counter
+oxlorg.nftables.counter
 ===========================
 
-
-----
 
 Usage
 *****
 
 
-----
-
 Examples
 ********
 
-ansibleguy.nftables.counter
+oxlorg.nftables.counter
 ===========================
 
 .. code-block:: yaml
@@ -48,4 +44,4 @@ ansibleguy.nftables.counter
       become: true
       tasks:
         - name: Example
-          ansibleguy.nftables.counter:
+          oxlorg.nftables.counter:

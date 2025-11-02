@@ -1,4 +1,4 @@
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.hc import \
     ID_SEPARATOR, ID_KEY
 
 

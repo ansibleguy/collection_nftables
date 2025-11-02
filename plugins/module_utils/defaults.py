@@ -1,7 +1,7 @@
 from packaging import version
 
 CONFIG = dict(
-    path_log='/tmp/ansibleguy.nftables',
+    path_log='/tmp/oxlorg.nftables',
     min_version=version.parse('0.9.3'),
 )
 

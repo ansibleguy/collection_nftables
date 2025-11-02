@@ -21,8 +21,8 @@ COL_DIR="$(pwd)"
 TMP_DIR="/tmp/.nftables_test_$(date +%s)"
 
 TMP_COL_DIR="${TMP_DIR}/collections"
-mkdir -p "${TMP_COL_DIR}/ansible_collections/ansibleguy/"
-ln -s "$COL_DIR" "${TMP_COL_DIR}/ansible_collections/ansibleguy/nftables"
+mkdir -p "${TMP_COL_DIR}/ansible_collections/oxlorg/"
+ln -s "$COL_DIR" "${TMP_COL_DIR}/ansible_collections/oxlorg/nftables"
 
 export ANSIBLE_COLLECTIONS_PATH="$TMP_COL_DIR"
 export ANSIBLE_INVENTORY_UNPARSED_WARNING=False

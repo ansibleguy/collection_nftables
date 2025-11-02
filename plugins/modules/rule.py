@@ -1,28 +1,28 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Copyright: (C) 2023, AnsibleGuy <guy@ansibleguy.net>
+# Copyright: (C) 2025, Rath Pascal <contact+nftables@oxl.at>
 # GNU General Public License v3.0+ (see https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from ansible.module_utils.basic import AnsibleModule
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.utils import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.utils import \
     profiler
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.defaults import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.defaults import \
     NFT_MOD_ARGS, NFT_RULE_MOD_ARGS
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.main import \
     diff_remove_empty, sort_param_lists
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.rule import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.rule import \
     clean_comment
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.main.rule import Rule
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.nft import NFT
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.main.rule import Rule
+from ansible_collections.oxlorg.nftables.plugins.module_utils.nft import NFT
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.hc import \
     RULE_ACTIONS
 
 PROFILE = False  # create log to profile time consumption
 
-# DOCUMENTATION = 'https://nftables.ansibleguy.net/modules/rule.html'
-# EXAMPLES = 'https://nftables.ansibleguy.net/modules/rule.html'
+# DOCUMENTATION = 'https://ansible-nftables.oxl.app/modules/rule.html'
+# EXAMPLES = 'https://ansible-nftables.oxl.app/modules/rule.html'
 
 
 def run_module():
@@ -134,7 +134,7 @@ def run_module():
 
     if PROFILE or module.params['debug']:
         profiler(check=process, log_file='rule.log')
-        # log in /tmp/ansibleguy.nftables/
+        # log in /tmp/oxlorg.nftables/
 
     else:
         process()

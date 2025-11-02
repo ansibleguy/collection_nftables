@@ -8,7 +8,7 @@ List
 
 **STATE**: testing
 
-**TESTS**: `ansibleguy.nftables.list <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/list.yml>`_
+**TESTS**: `oxlorg.nftables.list <https://github.com/O-X-L/ansible-collection-nftables/blob/latest/roles/_nftables_test1/tasks/list.yml>`_
 
 ----
 
@@ -17,7 +17,7 @@ Definition
 
 .. include:: ../_include/param_basic.rst
 
-ansibleguy.nftables.list
+oxlorg.nftables.list
 ========================
 
 ..  csv-table:: Definition
@@ -34,7 +34,7 @@ ansibleguy.nftables.list
 Examples
 ********
 
-ansibleguy.nftables.list
+oxlorg.nftables.list
 ========================
 
 .. code-block:: yaml
@@ -44,13 +44,13 @@ ansibleguy.nftables.list
       become: true
       tasks:
         - name: Example
-          ansibleguy.nftables.list:
+          oxlorg.nftables.list:
             target: 'rules'
             # filter_tables: 'ip filter'
             # filter_chains: 'ufw-not-local'
 
         - name: Pulling existing tables
-          ansibleguy.nftables.list:
+          oxlorg.nftables.list:
             target: 'tables'
           register: nftables_tables
 
@@ -61,7 +61,7 @@ ansibleguy.nftables.list
         # ["ip filter", "ip6 filter"]
 
         - name: Pulling existing chains of table 'ip filter'
-          ansibleguy.nftables.list:
+          oxlorg.nftables.list:
             target: 'chains'
             filter_tables: 'ip filter'  # 'ip' = family, 'filter' = name
           register: nftables_chains
@@ -73,7 +73,7 @@ ansibleguy.nftables.list
         # {"ip filter": ["input", "output", "route"]}
 
         - name: Pulling existing rules of chain 'input' in table 'ip filter'
-          ansibleguy.nftables.list:
+          oxlorg.nftables.list:
             target: 'rules'
             filter_tables: 'ip filter'
             filter_chains: 'input'

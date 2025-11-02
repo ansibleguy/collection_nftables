@@ -8,5 +8,7 @@ echo ''
 echo 'BUILDING tarball'
 echo ''
 
-rm -f ansibleguy-nftables-*.tar.gz
+rm -f oxlorg-nftables-*.tar.gz
 ansible-galaxy collection build
+
+echo "CHECK CONTENT: 'tar --list -f oxlorg-nftables-*.tar.gz'"

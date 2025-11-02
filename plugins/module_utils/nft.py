@@ -2,17 +2,17 @@ from json import loads as json_loads
 
 from ansible.module_utils.basic import AnsibleModule
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.hc import \
     VALID_ENTRIES
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import is_in
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.main import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.main import is_in
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.main import \
     NftTable, NftChain
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.rule import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.rule import \
     NftRule
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.sub import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.sub import \
     NftSet, NftLimit, NftCounter
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.check import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.check import \
     check_dependencies
 
 
