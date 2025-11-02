@@ -1,6 +1,6 @@
 from ansible.module_utils.basic import AnsibleModule
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.base import BaseModule
+from ansible_collections.oxlorg.nftables.plugins.module_utils.base import BaseModule
 
 
 class Rule(BaseModule):

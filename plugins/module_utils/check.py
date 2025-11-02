@@ -1,8 +1,8 @@
 from re import match as regex_match
 from packaging import version
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.defaults import CONFIG
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.subps import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.defaults import CONFIG
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.subps import \
     process
 
 

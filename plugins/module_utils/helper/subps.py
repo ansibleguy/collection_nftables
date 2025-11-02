@@ -1,6 +1,6 @@
 import subprocess
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import is_in
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.main import is_in
 
 
 def _format_command(cmd: (str, list)) -> list:

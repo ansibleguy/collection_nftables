@@ -10,7 +10,7 @@ Variables
 
 **STATE**: development
 
-**TESTS**: `ansibleguy.nftables.var <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/var.yml>`_
+**TESTS**: `oxlorg.nftables.var <https://github.com/O-X-L/ansible-collection-nftables/blob/latest/roles/_nftables_test1/tasks/var.yml>`_
 
 **NFTables Docs**:
 
@@ -23,22 +23,18 @@ Definition
 
 .. include:: ../_include/param_basic.rst
 
-ansibleguy.nftables.var
+oxlorg.nftables.var
 =======================
 
-
-----
 
 Usage
 *****
 
 
-----
-
 Examples
 ********
 
-ansibleguy.nftables.var
+oxlorg.nftables.var
 =======================
 
 .. code-block:: yaml
@@ -48,4 +44,4 @@ ansibleguy.nftables.var
       become: true
       tasks:
         - name: Example
-          ansibleguy.nftables.var:
+          oxlorg.nftables.var:

@@ -4,7 +4,7 @@ from io import StringIO
 from datetime import datetime
 from pathlib import Path
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.defaults import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.defaults import \
     CONFIG
 
 

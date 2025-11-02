@@ -31,7 +31,7 @@ For the python library to work the installed NFTables version needs to be >= 0.9
 
 The ansible-modules of this collection use the `python3-nftables module <https://ral-arturo.org/2020/11/22/python-nftables-tutorial.html>`_ to interact with nftables.
 
-You can either install it using your package manager (*apt in the example*) or using pip (*`unofficial version provided by AnsibleGuy <https://github.com/ansibleguy/python3-nftables>`_ *) on the target system.
+You can either install it using your package manager (*apt in the example*) or using pip (`unofficial version provided by OXL <https://github.com/O-X-L/python3-nftables>`_) on the target system.
 
 .. code-block:: bash
 
@@ -39,7 +39,7 @@ You can either install it using your package manager (*apt in the example*) or u
     sudo apt install python3-nftables
 
     # pip => make sure it is installed for the root user or use a virtualenv
-    sudo pip install ansibleguy-nftables
+    sudo pip install oxl-nftables
 
 Using Ansible
 =============
@@ -52,7 +52,7 @@ Using Ansible
 
     - name: Installing NFTables python-module
       ansible.builtin.pip:
-        name: 'ansibleguy-nftables'
+        name: 'oxl-nftables'
 
     - name: Enabling and starting NFTables
       ansible.builtin.service:
@@ -67,8 +67,8 @@ Collection
 .. code-block:: bash
 
     # unstable/latest version:
-    ansible-galaxy collection install git+https://github.com/ansibleguy/collection_nftables.git
+    ansible-galaxy collection install git+https://github.com/O-X-L/ansible-collection-nftables.git
 
     # install to specific director for easier development
     cd $PLAYBOOK_DIR
-    ansible-galaxy collection install git+https://github.com/ansibleguy/collection_nftables.git -p ./collections
+    ansible-galaxy collection install git+https://github.com/O-X-L/ansible-collection-nftables.git -p ./collections

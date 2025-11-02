@@ -1,4 +1,4 @@
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.main import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.main import \
     NftTable, NftItem, NftChain
 
 # for schema see: https://www.mankier.com/5/libnftables-json

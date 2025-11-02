@@ -621,8 +621,8 @@ copy of the Program in return for a fee.
                      END OF TERMS AND CONDITIONS
 
 
-    Ansible Collection to do SOMETHING.
-    Copyright (C) 2022 AnsibleGuy
+    Ansible Collection to manage NFTables via libnftables
+    Copyright (C) 2025 Rath Pascal / OXL IT Services
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -637,5 +637,5 @@ copy of the Program in return for a fee.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-    E-Mail: contact@ansibleguy.net
-    Web: https://github.com/ansibleguy
+    E-Mail: contact+nftables@oxl.at
+    Web: https://github.com/O-X-L

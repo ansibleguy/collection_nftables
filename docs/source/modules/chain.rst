@@ -10,7 +10,7 @@ Chains
 
 **STATE**: testing
 
-**TESTS**: `ansibleguy.nftables.chain <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/chain.yml>`_
+**TESTS**: `oxlorg.nftables.chain <https://github.com/O-X-L/ansible-collection-nftables/blob/latest/roles/_nftables_test1/tasks/chain.yml>`_
 
 **NFTables Docs**:
 
@@ -23,7 +23,7 @@ Definition
 
 .. include:: ../_include/param_basic.rst
 
-ansibleguy.nftables.chain
+oxlorg.nftables.chain
 =========================
 
 ..  csv-table:: Definition
@@ -54,7 +54,7 @@ Changes on existing chains must be enforced using the 'force' parameter.
 Examples
 ********
 
-ansibleguy.nftables.chain
+oxlorg.nftables.chain
 =========================
 
 .. code-block:: yaml
@@ -64,7 +64,7 @@ ansibleguy.nftables.chain
       become: true
       tasks:
         - name: Example
-          ansibleguy.nftables.chain:
+          oxlorg.nftables.chain:
             table: 'main'
             table_family: 'ip'
             name: 'example'
@@ -78,7 +78,7 @@ ansibleguy.nftables.chain
             # state: present
 
         - name: Adding chain to manage forward-traffic
-          ansibleguy.nftables.chain:
+          oxlorg.nftables.chain:
             table: 'main'
             table_family: 'ip'
             name: 'example'
@@ -86,7 +86,7 @@ ansibleguy.nftables.chain
             policy: 'drop'
 
         - name: Adding comment to chain
-          ansibleguy.nftables.chain:
+          oxlorg.nftables.chain:
             table: 'main'
             table_family: 'ip'
             name: 'fwd'
@@ -95,7 +95,7 @@ ansibleguy.nftables.chain
             comment: 'forwarding traffic'
 
         - name: Pulling existing chains
-          ansibleguy.nftables.list:
+          oxlorg.nftables.list:
             target: 'chains'
           register: chains
 
@@ -104,14 +104,14 @@ ansibleguy.nftables.chain
             var: chains.data
 
         - name: Adding sub-chain
-          ansibleguy.nftables.chain:
+          oxlorg.nftables.chain:
             table: 'main'
             table_family: 'ip'
             name: 'sub'
             comment: 'chain used for some special stuff'
 
         - name: Removing forwarding-chain
-          ansibleguy.nftables.chain:
+          oxlorg.nftables.chain:
             table: 'main'
             table_family: 'ip'
             name: 'fwd'

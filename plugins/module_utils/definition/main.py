@@ -1,4 +1,4 @@
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.main import \
     value_or_none
 
 # for schema see: https://www.mankier.com/5/libnftables-json

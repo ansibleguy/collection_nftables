@@ -1,1 +1,7 @@
 docs/build/
+*.tar.gz
+.ansible/
+.idea/
+.vscode/
+.venv/
+venv/

@@ -10,7 +10,7 @@ Limits
 
 **STATE**: development
 
-**TESTS**: `ansibleguy.nftables.limit <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/limit.yml>`_
+**TESTS**: `oxlorg.nftables.limit <https://github.com/O-X-L/ansible-collection-nftables/blob/latest/roles/_nftables_test1/tasks/limit.yml>`_
 
 **NFTables Docs**:
 
@@ -23,22 +23,17 @@ Definition
 
 .. include:: ../_include/param_basic.rst
 
-ansibleguy.nftables.limit
+oxlorg.nftables.limit
 =========================
-
-
-----
 
 Usage
 *****
 
 
-----
-
 Examples
 ********
 
-ansibleguy.nftables.limit
+oxlorg.nftables.limit
 =========================
 
 .. code-block:: yaml
@@ -48,4 +43,4 @@ ansibleguy.nftables.limit
       become: true
       tasks:
         - name: Example
-          ansibleguy.nftables.limit:
+          oxlorg.nftables.limit:

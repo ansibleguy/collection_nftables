@@ -1,11 +1,11 @@
 ---
 
-namespace: 'ansibleguy'
+namespace: 'oxlorg'
 name: 'nftables'
-version: 1.0.3
+version: 1.0.4
 readme: 'README.md'
 authors:
-  - 'AnsibleGuy <guy@ansibleguy.net>'
+  - 'OXL IT Services <contact+nftables@oxl.at>'
 description: "Ansible Collection to manage NFTables firewalls"
 license_file: 'LICENSE.txt'
 tags:
@@ -17,8 +17,12 @@ tags:
   - 'security'
   - 'filter'
 dependencies: {}
-repository: 'https://github.com/ansibleguy/collection_nftables'
-documentation: 'https://nftables.ansibleguy.net'
-homepage: 'https://ansibleguy.net'
-issues: 'https://github.com/ansibleguy/collection_nftables/issues'
-build_ignore: []
+repository: 'https://github.com/O-X-L/ansible-collection-nftables'
+documentation: 'https://ansible-nftables.oxl.app'
+homepage: 'https://www.OXL.at'
+issues: 'https://github.com/O-X-L/ansible-collection-nftables/issues'
+build_ignore: [
+  '*_pytest.py', '*_testdata.py', '*pytest_cache', '*/_tmpl.py',
+  '.**', 'pytest.ini', 'requirements_*.txt',
+  'docs**', 'scripts**', 'venv**', 'Makefile', 'legacy**',
+]

@@ -6,8 +6,8 @@
 Rules
 =====
 
-**TESTS**: `ansibleguy.nftables.rule <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/rule.yml>`_ |
-`ansibleguy.nftables.rule_raw <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/rule_raw.yml>`_
+**TESTS**: `oxlorg.nftables.rule <https://github.com/O-X-L/ansible-collection-nftables/blob/latest/roles/_nftables_test1/tasks/rule.yml>`_ |
+`oxlorg.nftables.rule_raw <https://github.com/O-X-L/ansible-collection-nftables/blob/latest/roles/_nftables_test1/tasks/rule_raw.yml>`_
 
 **NFTables Docs**:
 
@@ -33,7 +33,7 @@ Definition
     "before","string","false","\-","before_id","This rule should be placed before a specific other rule. Provide the unique identifier of the other rule!"
     "after","string","false","\-","after_id","This rule should be placed after a specific other rule. Provide the unique identifier of the other rule!"
 
-ansibleguy.nftables.rule_raw
+oxlorg.nftables.rule_raw
 ============================
 
 **STATE**: testing
@@ -44,7 +44,7 @@ ansibleguy.nftables.rule_raw
 
     "rule","string","false for deletion else true","\-","raw, line, content","The raw rule to add to the config"
 
-ansibleguy.nftables.rule
+oxlorg.nftables.rule
 ========================
 
 **STATE**: development
@@ -65,7 +65,7 @@ That ID is added at the beginning of the rule's comment field. The ID is separat
 Examples
 ********
 
-ansibleguy.nftables.list
+oxlorg.nftables.list
 ========================
 
 .. code-block:: yaml
@@ -75,7 +75,7 @@ ansibleguy.nftables.list
       become: true
       tasks:
         - name: Pulling existing rules
-          ansibleguy.nftables.list:
+          oxlorg.nftables.list:
             target: 'rules'
           register: rules
 
@@ -84,7 +84,7 @@ ansibleguy.nftables.list
             var: rules.data
 
 
-ansibleguy.nftables.rule_raw
+oxlorg.nftables.rule_raw
 ============================
 
 .. code-block:: yaml
@@ -94,7 +94,7 @@ ansibleguy.nftables.rule_raw
       become: true
       tasks:
         - name: Example
-          ansibleguy.nftables.rule_raw:
+          oxlorg.nftables.rule_raw:
             id: 'example_id'
             chain: 'target_chain'
             # table: ''
@@ -104,7 +104,7 @@ ansibleguy.nftables.rule_raw
             rule: 'iifname "lo" accept comment "Allow loopback traffic"'
 
         - name: Adding rule
-          ansibleguy.opnsense.rule_raw:
+          oxlorg.nftables.rule_raw:
             id: '11'
             chain: 'input'
             table: 'filter'
@@ -112,7 +112,7 @@ ansibleguy.nftables.rule_raw
             rule: 'iifname "lo" accept comment "Allow loopback traffic"'
 
         - name: Moving rule before rule 14
-          ansibleguy.opnsense.rule_raw:
+          oxlorg.nftables.rule_raw:
             id: '11'
             chain: 'input'
             table: 'filter'
@@ -121,7 +121,7 @@ ansibleguy.nftables.rule_raw
             before: '14'
 
         - name: Removing
-          ansibleguy.opnsense.rule_raw:
+          oxlorg.nftables.rule_raw:
             id: '11'
             chain: 'input'
             table: 'filter'

@@ -1,8 +1,8 @@
 from ansible.module_utils.basic import AnsibleModule
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.base import BaseModule
+from ansible_collections.oxlorg.nftables.plugins.module_utils.base import BaseModule
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.main import \
     one_in, is_in
 
 

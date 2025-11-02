@@ -10,7 +10,7 @@ Sets
 
 **STATE**: development
 
-**TESTS**: `ansibleguy.nftables.set <https://github.com/ansibleguy/collection_nftables/blob/latest/roles/_nftables_test1/tasks/set.yml>`_
+**TESTS**: `oxlorg.nftables.set <https://github.com/O-X-L/ansible-collection-nftables/blob/latest/roles/_nftables_test1/tasks/set.yml>`_
 
 **NFTables Docs**:
 
@@ -23,22 +23,16 @@ Definition
 
 .. include:: ../_include/param_basic.rst
 
-ansibleguy.nftables.set
+oxlorg.nftables.set
 =======================
-
-
-----
 
 Usage
 *****
 
-
-----
-
 Examples
 ********
 
-ansibleguy.nftables.set
+oxlorg.nftables.set
 =======================
 
 .. code-block:: yaml
@@ -48,4 +42,4 @@ ansibleguy.nftables.set
       become: true
       tasks:
         - name: Example
-          ansibleguy.nftables.set:
+          oxlorg.nftables.set:

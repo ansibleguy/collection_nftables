@@ -1,3 +1,3 @@
 # Documentation
 
-Sphinx-based documentation: [https://nftables.ansibleguy.net](https://nftables.ansibleguy.net)
+Sphinx-based documentation: [https://ansible-nftables.oxl.app](https://ansible-nftables.oxl.app)

@@ -1,12 +1,12 @@
 from ansible.module_utils.basic import AnsibleModule
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.base import BaseModule
+from ansible_collections.oxlorg.nftables.plugins.module_utils.base import BaseModule
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.main import \
     is_in, all_in
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.rule import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.rule import \
     get_uid_comment, clean_comment
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.hc import \
     ID_SEPARATOR, ID_KEY
 
 

@@ -1,12 +1,12 @@
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.main import \
     value_or_none
 
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.hc import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.hc import \
     RULE_ACTIONS, ID_SEPARATOR, ID_KEY
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.helper.main import is_in
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.main import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.helper.main import is_in
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.main import \
     NftTable, NftItem, NftChain
-from ansible_collections.ansibleguy.nftables.plugins.module_utils.definition.sub import \
+from ansible_collections.oxlorg.nftables.plugins.module_utils.definition.sub import \
     NftMatch, NftJump, NftLimit, NftGoTo
 
 # for schema see: https://www.mankier.com/5/libnftables-json
