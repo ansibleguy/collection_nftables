@@ -1,5 +1,13 @@
 # Ansible Collection - oxlorg.nftables
 
+<p align="center">
+    <a title="Support this Project (Donate, Support-Licenses)" href="https://shop.oxl.app/collections/open-source">
+        <img src="https://files.oxl.at/img/badge-oss-support.svg" alt="Support Badge (Donate, Support-Licenses)"/>
+    </a>
+</p>
+
+----
+
 [![Ansible Galaxy](https://badges.oss.oxl.app/galaxy.badge.svg)](https://galaxy.ansible.com/ui/repo/published/oxlorg/nftables)
 
 [![Lint](https://github.com/O-X-L/ansible-collection-nftables/actions/workflows/lint.yml/badge.svg)](https://github.com/O-X-L/ansible-collection-nftables/actions/workflows/lint.yml)
