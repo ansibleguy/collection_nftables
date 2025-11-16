@@ -74,21 +74,36 @@ html_theme_options = {
     "version_dropdown": True,
     "version_info": [
         {
-            "version": "https://www.O-X-L.com",
+            "version": "https://shop.oxl.app/collections/open-source",
+            "title": "Support this Project",
+            "aliases": [],
+        },
+        {
+            "version": "https://www.OXL.app",
             "title": "About OXL",
             "aliases": [],
         },
     ],
     "social": [
         {
+            "icon": "fontawesome/solid/wallet",
+            "link": "https://shop.oxl.app/collections/open-source",
+            "name": "Support this Project",
+        },
+        {
             "icon": "fontawesome/solid/globe",
-            "link": "https://www.O-X-L.com",
+            "link": "https://www.OXL.app",
             "name": "About OXL",
         },
         {
             "icon": "fontawesome/brands/github",
             "link": "https://github.com/O-X-L",
             "name": "OXL on GitHub",
+        },
+        {
+            "icon": "fontawesome/brands/git-alt",
+            "link": "https://codeberg.org/OXL",
+            "name": "OXL on Codeberg",
         },
     ],
 }
